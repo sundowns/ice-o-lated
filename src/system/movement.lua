@@ -1,4 +1,4 @@
-local movement = ECS.System({COMPONENTS.position, COMPONENTS.movespeed})
+local movement = System({COMPONENTS.position, COMPONENTS.movespeed})
 
 function movement:update(dt)
     local e 

@@ -5,7 +5,6 @@ function gridSystem:init(msg)
 end
 
 function gridSystem:update(dt)
-    print('grid is alive! '..dt)
 end
 
 function gridSystem:draw()
