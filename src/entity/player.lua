@@ -1,7 +1,13 @@
 local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
+local width = playerImg:getWidth()
+local height = playerImg:getHeight()
 
 local player =
-    Entity():give(COMPONENTS.sprite, playerImg, 0, 2, 2):give(COMPONENTS.position, 0, 0):give(COMPONENTS.speed, 180):give(
+    Entity():give(COMPONENTS.sprite, playerImg, 0, CONSTANTS.CELL_WIDTH / width, CONSTANTS.CELL_HEIGHT / height):give(
+    COMPONENTS.position,
+    0,
+    0
+):give(COMPONENTS.speed, 180):give(
     COMPONENTS.keyInput,
     {
         down = {
