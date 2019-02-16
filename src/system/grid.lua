@@ -139,4 +139,8 @@ function gridSystem:pushed(x, y, direction)
     end
 end
 
+function gridSystem:stageLoaded(stage)
+    print("grid system received stage data!")
+end
+
 return gridSystem
