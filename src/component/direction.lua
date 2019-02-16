@@ -1,6 +1,8 @@
-local direction = Component(function(e, hdir, vdir)
-    e.hdir = hdir or 0
-    e.vdir = vdir or 0
-end)
+local direction =
+    Component(
+    function(e, direction)
+        e.value = CONSTANTS.ORIENTATIONS[direction]
+    end
+)
 
 return direction

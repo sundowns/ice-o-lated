@@ -1,14 +1,8 @@
 local logic = {}
 
-function logic.moveHorizontal(d)
+function logic.move(orientation)
     return function()
-        INSTANCES.world:emit("change_dir", d, nil)
-    end
-end
-
-function logic.moveVertical(d)
-    return function()
-        INSTANCES.world:emit("change_dir", nil, d)
+        INSTANCES.world:emit("change_dir", orientation)
     end
 end
 

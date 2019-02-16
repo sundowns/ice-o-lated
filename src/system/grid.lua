@@ -1,10 +1,10 @@
-local gridSystem = System({COMPONENTS.position}, {COMPONENTS.position, COMPONENTS.direction, "moveable"})
+local gridSystem = System({COMPONENTS.position, COMPONENTS.direction, COMPONENTS.speed, "moveable"})
 
 function gridSystem:init(cols, rows, cellWidth, cellHeight)
-    self.cols = cols or 32
-    self.rows = rows or 16
-    self.cellWidth = cellWidth or 32
-    self.cellHeight = cellHeight or 32
+    self.cols = cols
+    self.rows = rows
+    self.cellWidth = cellWidth
+    self.cellHeight = cellHeight
     self.grid = {}
 
     for x = 0, self.cols do
@@ -34,30 +34,23 @@ function gridSystem:draw()
 end
 
 function gridSystem:update(dt)
-    -- local e
-    -- for i = 1, self.pool.size do
-    --     e = self.pool:get(i)
-    --     local pos = e:get(COMPONENTS.position).pos
-    --     local speed = e:get(COMPONENTS.movespeed)
-    --     local direction = e:get(COMPONENTS.direction)
-    --     local left = 0
-    --     local right = 0
-    --     local up = 0
-    --     local down = 0
-    --     if direction.hdir == 1 then
-    --         right = 1
-    --     else -- direction.hdir ==then -1
-    --         left = -1
-    --     end
-    --     --local right = direction.hdir
-    --     --local up = direction.vdir
-    --     --local down = direction.vdir
-    --     -- print("pos: " .. pos.x .. pos.y)
-    --     -- print("speed: " .. speed.x .. speed.y)
-    --     -- print(down)
-    --     pos.x = speed.x * (left + right) * dt
-    --     pos.y = speed.y * (up + down) * dt
-    -- end
+    local e
+    for i = 1, self.moveable.size do
+        e = self.moveable:get(i)
+        local pos = e:get(COMPONENTS.position).pos
+        local speed = e:get(COMPONENTS.speed).value
+        local direction = e:get(COMPONENTS.direction).value
+
+        if direction == CONSTANTS.ORIENTATIONS.LEFT then
+            pos.x = pos.x - speed * dt
+        elseif direction == CONSTANTS.ORIENTATIONS.UP then
+            pos.y = pos.y - speed * dt
+        elseif direction == CONSTANTS.ORIENTATIONS.RIGHT then
+            pos.x = pos.x + speed * dt
+        elseif direction == CONSTANTS.ORIENTATIONS.DOWN then
+            pos.y = pos.y + speed * dt
+        end
+    end
 end
 
 return gridSystem
