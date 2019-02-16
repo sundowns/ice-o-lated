@@ -1,4 +1,8 @@
-local gridSystem = System({COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"})
+local gridSystem =
+    System(
+    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"},
+    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"}
+)
 
 function gridSystem:init(cols, rows, cellWidth, cellHeight)
     self.cols = cols
@@ -56,8 +60,7 @@ function gridSystem:update(dt)
         local direction = e:get(COMPONENTS.direction)
         local gridlocked = e:get(COMPONENTS.gridlocked)
 
-        if direction.isActive and not gridlocked.isMoving then
-            direction:setActive(false)
+        if gridlocked.isOrderedToMove and not gridlocked.isMoving then
             if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
                 self:moveToNewCell(-1, 0, pos, gridlocked)
             elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
@@ -71,18 +74,28 @@ function gridSystem:update(dt)
     end
 end
 
+function gridSystem:move()
+    for i = 1, self.player.size do
+        e = self.player:get(i)
+
+        local gridlocked = e:get(COMPONENTS.gridlocked)
+        if not gridlocked.isOrderedToMove and not gridlocked.isMoving then
+            gridlocked:orderToMove()
+        end
+    end
+end
+
 function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
     if self:cellExists(gridlocked.pos.x + dx, gridlocked.pos.y + dy) then
         local newCellX = (gridlocked.pos.x + dx) * self.cellWidth
         local newCellY = (gridlocked.pos.y + dy) * self.cellHeight
         gridlocked:translate(dx, dy)
         Timer.tween(gridlocked.transitionTime, pos, {x = newCellX, y = newCellY})
+        gridlocked:orderToStopMoving()
         Timer.after(
             gridlocked.transitionTime,
             function()
                 gridlocked:setMoving(false)
-                Util.t.print(gridlocked)
-                Util.t.print(pos)
             end
         )
     end

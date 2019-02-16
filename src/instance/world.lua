@@ -9,8 +9,8 @@ world:addEntity(ENTITIES.player)
 
 world:addSystem(gridSystem, "draw")
 world:addSystem(gridSystem, "update")
+world:addSystem(gridSystem, "move")
 
-world:addSystem(dir, "update")
 world:addSystem(dir, "change_dir")
 
 world:addSystem(keyInput, "update")
@@ -21,8 +21,8 @@ world:addSystem(renderSprite, "draw")
 
 world:enableSystem(gridSystem, "draw")
 world:enableSystem(gridSystem, "update")
+world:enableSystem(gridSystem, "move")
 
-world:enableSystem(dir, "update")
 world:enableSystem(dir, "change_dir")
 
 world:enableSystem(keyInput, "update")

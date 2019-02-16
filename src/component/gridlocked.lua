@@ -4,6 +4,7 @@ local gridlocked =
         e.transitionTime = transitionTime
         e.pos = Vector(x, y)
         e.isMoving = false
+        e.isOrderedToMove = false
     end
 )
 
@@ -15,6 +16,14 @@ end
 
 function gridlocked:setMoving(isMoving)
     self.isMoving = isMoving
+end
+
+function gridlocked:orderToMove()
+    self.isOrderedToMove = true
+end
+
+function gridlocked:orderToStopMoving()
+    self.isOrderedToMove = false
 end
 
 return gridlocked
