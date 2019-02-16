@@ -1,15 +1,12 @@
 local world = Instance()
 
-local gridSystem = SYSTEMS.grid("ello!!!")
+local gridSystem = SYSTEMS.grid()
 local dir = SYSTEMS.direction()
 local keyInput = SYSTEMS.keyInput()
 local movement = SYSTEMS.movement()
 local renderSprite = SYSTEMS.renderSprite()
 
 world:addEntity(ENTITIES.player)
-world:addEntity(ENTITIES.grid)
-
-local gridSystem = SYSTEMS.grid("ello!!!")
 
 world:addSystem(gridSystem, "draw")
 

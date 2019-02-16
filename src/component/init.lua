@@ -6,6 +6,5 @@ return {
     movespeed = require(PATH .. ".movespeed"),
     keyInput = require(PATH .. ".keyInput"),
     sprite = require(PATH .. ".sprite"),
-    playerControlled = require(PATH .. ".playerControlled"),
-    grid = require(PATH .. ".grid")
+    playerControlled = require(PATH .. ".playerControlled")
 }
