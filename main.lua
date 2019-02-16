@@ -18,6 +18,7 @@ Camera = nil
 
 
 function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest", 1)
     Util = require('lib.util')
     ECS = require('lib.concord').init({
         useEvents = false,
@@ -38,10 +39,11 @@ function love.load()
 end
 
 function love.update(dt)
+    INSTANCES.world:emit("update", dt)
 end
 
 function love.draw()
-    love.graphics.print('grim')
+    INSTANCES.world:emit("draw")
 end
 
 function love.keyreleased(key)
