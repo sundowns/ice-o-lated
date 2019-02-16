@@ -44,6 +44,10 @@ function love.draw()
     love.graphics.print('grim')
 end
 
+function love.keyreleased(key)
+    INSTANCES.world:emit("keyreleased", key)
+end
+
 function love.keypressed(key)
     if key == "f1" then
         DEBUG = not DEBUG
@@ -52,4 +56,5 @@ function love.keypressed(key)
     elseif key == "space" then
         love.event.quit('restart')
     end
+    INSTANCES.world:emit("keypressed", key)
 end
