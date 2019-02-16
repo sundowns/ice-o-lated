@@ -19,6 +19,8 @@ Camera = nil
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
     Util = require("lib.util")
+    assets = require("lib.cargo").init("asset")
+    anim8 = require("lib.anime8")
     ECS =
         require("lib.concord").init(
         {
