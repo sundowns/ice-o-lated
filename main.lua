@@ -33,6 +33,7 @@ function love.load()
     Camera = require("lib.camera")
     Timer = require("lib.timer")
 
+    LOGIC = require("src.logic")
     COMPONENTS = require("src.component")
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")

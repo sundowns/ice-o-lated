@@ -1,4 +1,4 @@
-local movespeed = ECS.Component(function(e, x, y)
+local movespeed = Component(function(e, x, y)
     e.x = x
     e.y = y
 end)

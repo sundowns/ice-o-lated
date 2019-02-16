@@ -1,13 +1,12 @@
-local keyInput = ECS.System({COMPONENTS.playerControlled})
+local keyInput = System({COMPONENTS.playerControlled})
 
 function keyInput:update(dt)
-    local e 
-    for i = 1, self.pool.size do 
+    local e
+    for i = 1, self.pool.size do
         e = self.pool:get(i)
         local inputs = e:get(COMPONENTS.keyInput).inputs
-        for key, func in pairs(inputs.down) do 
-            if love.keyboard.isDown(key) then 
-                INSTANCES.world:emit("capture", key, true)
+        for key, func in pairs(inputs.down) do
+            if love.keyboard.isDown(key) then
                 func()
             end
         end
@@ -15,13 +14,13 @@ function keyInput:update(dt)
 end
 
 function keyInput:keypressed(key)
-    local e 
-    for i = 1, self.pool.size do 
+    local e
+    for i = 1, self.pool.size do
         e = self.pool:get(i)
-        local inputs = e:get(COMPONENTS.key_input).inputs
-        INSTANCES.world:emit("capture", key, true)
-        for k, v in pairs(inputs.keypressed) do 
-            if key == k then 
+        local inputs = e:get(COMPONENTS.keyInput).inputs
+
+        for k, v in pairs(inputs.keypressed) do
+            if key == k then
                 v()
             end
         end
@@ -29,13 +28,13 @@ function keyInput:keypressed(key)
 end
 
 function keyInput:keyreleased(key)
-    local e 
-    for i = 1, self.pool.size do 
+    local e
+    for i = 1, self.pool.size do
         e = self.pool:get(i)
-        local inputs = e:get(COMPONENTS.key_input).inputs
-        INSTANCES.world:emit("capture", key, false)
-        for k, v in pairs(inputs.keyreleased) do 
-            if key == k then 
+        local inputs = e:get(COMPONENTS.keyInput).inputs
+
+        for k, v in pairs(inputs.keyreleased) do
+            if key == k then
                 v()
             end
         end
