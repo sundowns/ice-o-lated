@@ -7,7 +7,7 @@ function keyInput:update(dt)
         local inputs = e:get(COMPONENTS.keyInput).inputs
         for key, func in pairs(inputs.down) do 
             if love.keyboard.isDown(key) then 
-                GAME.current:emit("capture", key, true)
+                INSTANCES.world:emit("capture", key, true)
                 func()
             end
         end
@@ -19,7 +19,7 @@ function keyInput:keypressed(key)
     for i = 1, self.pool.size do 
         e = self.pool:get(i)
         local inputs = e:get(COMPONENTS.key_input).inputs
-        GAME.current:emit("capture", key, true)
+        INSTANCES.world:emit("capture", key, true)
         for k, v in pairs(inputs.keypressed) do 
             if key == k then 
                 v()
@@ -33,7 +33,7 @@ function keyInput:keyreleased(key)
     for i = 1, self.pool.size do 
         e = self.pool:get(i)
         local inputs = e:get(COMPONENTS.key_input).inputs
-        GAME.current:emit("capture", key, false)
+        INSTANCES.world:emit("capture", key, false)
         for k, v in pairs(inputs.keyreleased) do 
             if key == k then 
                 v()
