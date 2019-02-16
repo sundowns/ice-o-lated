@@ -104,4 +104,8 @@ function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
     end
 end
 
+function gridSystem:stageLoaded(stage)
+    print("grid system received stage data!")
+end
+
 return gridSystem
