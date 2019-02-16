@@ -1,5 +1,6 @@
 local gridSystem =
     System(
+    {COMPONENTS.position, COMPONENTS.gridlocked, "gridbased"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"}
 )
@@ -25,10 +26,6 @@ function gridSystem:init(cols, rows, cellWidth, cellHeight)
     end
 end
 
-function gridSystem:entityCreated(x, y)
-    self.grid[x][y].isOccupied = true
-end
-
 function gridSystem:freeCell(x, y)
     self.grid[x][y].isOccupied = false
 end
@@ -42,7 +39,8 @@ function gridSystem:cellIsOccupied(x, y)
 end
 
 function gridSystem:entityAdded(e)
-    print("im here")
+    local gridpos = e:get(COMPONENTS.gridlocked).pos
+    self.grid[gridpos.x][gridpos.y].isOccupied = true
     -- we got a man with a position, put him on our grid!!!!!!!!!!
 end
 

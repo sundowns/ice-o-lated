@@ -1,7 +1,7 @@
 local gridlocked =
     Component(
     function(e, transitionTime, x, y)
-        e.transitionTime = transitionTime
+        e.transitionTime = transitionTime or 1
         e.pos = Vector(x, y)
         e.isMoving = false
         e.isOrderedToMove = false
