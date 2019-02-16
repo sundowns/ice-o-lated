@@ -42,42 +42,40 @@ function gridSystem:update(dt)
     local e
     for i = 1, self.moveable.size do
         e = self.moveable:get(i)
+
         local pos = e:get(COMPONENTS.position).pos
-        -- local speed = e:get(COMPONENTS.speed).value
-        local direction = e:get(COMPONENTS.direction).value
+        local direction = e:get(COMPONENTS.direction)
         local gridlocked = e:get(COMPONENTS.gridlocked)
 
-        -- tween the movement to the next cell in that direction
-        if direction == CONSTANTS.ORIENTATIONS.LEFT then
-            if self:cellExists(pos.x - 1, pos.y) then
-                local newCellX = (pos.x - 1) * self.cellWidth
-                Timer.tween(gridlocked.transitionTime, pos, {x = newCellX})
-                gridlocked:translate(-1, 0)
-            end
-        elseif direction == CONSTANTS.ORIENTATIONS.UP then
-            -- pos.y = pos.y - speed * dt
-            if self:cellExists(pos.x, pos.y - 1) then
-                local newCellY = (pos.y - 1) * self.cellHeight
-                Timer.tween(gridlocked.transitionTime, pos, {y = newCellY})
-                gridlocked:translate(0, -1)
-            end
-        elseif direction == CONSTANTS.ORIENTATIONS.RIGHT then
-            -- pos.x = pos.x + speed * dt
-            if self:cellExists(pos.x + 1, pos.y) then
-                local newCellX = (pos.x + 1) * self.cellWidth
-                Timer.tween(gridlocked.transitionTime, pos, {x = newCellX})
-                gridlocked:translate(1, 0)
-            end
-        elseif direction == CONSTANTS.ORIENTATIONS.DOWN then
-            -- pos.y = pos.y + speed * dt
-            if self:cellExists(pos.x, pos.y + 1) then
-                local newCellY = (pos.y + 1) * self.cellHeight
-                Timer.tween(gridlocked.transitionTime, pos, {y = newCellY})
-                gridlocked:translate(0, 1)
+        if direction.isActive and not gridlocked.isMoving then
+            direction:setActive(false)
+            if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
+                self:moveToNewCell(-1, 0, pos, gridlocked)
+            elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
+                self:moveToNewCell(0, -1, pos, gridlocked)
+            elseif direction.value == CONSTANTS.ORIENTATIONS.RIGHT then
+                self:moveToNewCell(1, 0, pos, gridlocked)
+            elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
+                self:moveToNewCell(0, 1, pos, gridlocked)
             end
         end
+    end
+end
 
-        -- TODO: update entity position
+function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
+    if self:cellExists(gridlocked.pos.x + dx, gridlocked.pos.y + dy) then
+        local newCellX = (gridlocked.pos.x + dx) * self.cellWidth
+        local newCellY = (gridlocked.pos.y + dy) * self.cellHeight
+        gridlocked:translate(dx, dy)
+        Timer.tween(gridlocked.transitionTime, pos, {x = newCellX, y = newCellY})
+        Timer.after(
+            gridlocked.transitionTime,
+            function()
+                gridlocked:setMoving(false)
+                Util.t.print(gridlocked)
+                Util.t.print(pos)
+            end
+        )
     end
 end
 
