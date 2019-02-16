@@ -16,6 +16,8 @@ Vector = nil
 Timer = nil
 Camera = nil
 
+local cam = nil
+
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
     CONSTANTS = require("src.constants")
@@ -41,6 +43,8 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
+
+    cam = Camera(CONSTANTS.COLUMNS * CONSTANTS.CELL_WIDTH / 2, CONSTANTS.ROWS * CONSTANTS.CELL_HEIGHT / 2)
 end
 
 function love.update(dt)
@@ -49,7 +53,11 @@ function love.update(dt)
 end
 
 function love.draw()
+    cam:attach()
+
     INSTANCES.world:emit("draw")
+
+    cam:detach()
 end
 
 function love.keyreleased(key)
