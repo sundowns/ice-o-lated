@@ -7,7 +7,7 @@ local player =
     COMPONENTS.position,
     0,
     0
-):give(COMPONENTS.speed, 180):give(
+):give(
     COMPONENTS.keyInput,
     {
         down = {
