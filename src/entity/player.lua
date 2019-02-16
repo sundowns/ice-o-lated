@@ -11,6 +11,11 @@ local player =
             d = LOGIC.move(CONSTANTS.ORIENTATIONS.RIGHT)
         }
     }
-):give(COMPONENTS.playerControlled):give(COMPONENTS.direction):give(COMPONENTS.gridlocked, 1, 0, 0):apply()
+):give(COMPONENTS.playerControlled):give(COMPONENTS.direction):give(
+    COMPONENTS.gridlocked,
+    CONSTANTS.BASE_TRANSITION_SPEED,
+    0,
+    0
+):apply()
 
 return player
