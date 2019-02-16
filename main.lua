@@ -18,9 +18,10 @@ Camera = nil
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
+    CONSTANTS = require("src.constants")
     Util = require("lib.util")
     assets = require("lib.cargo").init("asset")
-    anim8 = require("lib.anime8")
+    anim8 = require("lib.anim8")
     ECS =
         require("lib.concord").init(
         {
@@ -40,7 +41,6 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
-    CONSTANTS = require("src.constants")
 end
 
 function love.update(dt)
