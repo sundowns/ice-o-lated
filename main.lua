@@ -45,6 +45,7 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
+    INSTANCES.world:emit("loadStage", "stage/test1.lua")
     testRocks() -- TODO: remove
     cam = Camera(CONSTANTS.COLUMNS * CONSTANTS.CELL_WIDTH / 2, CONSTANTS.ROWS * CONSTANTS.CELL_HEIGHT / 2)
 end

@@ -1,6 +1,6 @@
 local dir = System({COMPONENTS.direction})
 
-function dir:change_dir(orientation)
+function dir:changeDirection(orientation)
     local e
     for i = 1, self.pool.size do
         e = self.pool:get(i)
