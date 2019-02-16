@@ -7,25 +7,54 @@ local gridSystem =
     {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.pressable, "pressable"}
 )
 
-function gridSystem:init(cols, rows, cellWidth, cellHeight, tiles)
+function gridSystem:init()
+    self.cols = 0
+    self.rows = 0
+    self.tileWidth = 0
+    self.tileHeight = 0
+    self.cellWidth = 0
+    self.cellHeight = 0
+    self.grid = {}
+    self.stage = nil
+end
+
+function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cellHeight, tiles, tileSet)
     self.cols = cols
     self.rows = rows
+    self.tileWidth = tileWidth
+    self.tileHeight = tileHeight
     self.cellWidth = cellWidth
     self.cellHeight = cellHeight
+    self.tileSet = tileSet
     self.grid = {}
 
-    for x = 0, self.cols do
+    Util.t.print(self.tileSet)
+    Util.t.print(tiles[1][1])
+    for x = 1, self.cols do
         self.grid[x] = {}
-        for y = 0, self.rows do
+        for y = 1, self.rows do
+            assert(tiles[x][y])
+            local tileType = tileSet.tiles[tiles[x][y].id]
+
+            local slidey = false
+            if tileType and tileType.properties and tileType.properties.SLIDEY then
+                slidey = true
+            end
+
             self.grid[x][y] = {
                 x = x,
                 y = y,
                 width = self.cellWidth,
                 height = self.cellHeight,
-                isOccupied = false
+                tileQuad = tiles[x][y].quad,
+                isOccupied = false,
+                slidey = slidey
             }
         end
     end
+
+    INSTANCES.world:emit("gridCreated", Vector(self.cols * self.cellWidth / 2, self.rows * self.cellHeight / 2))
+    INSTANCES.world:addEntity(ENTITIES.player)
 end
 
 function gridSystem:freeCell(x, y)
@@ -65,12 +94,18 @@ end
 function gridSystem:entityAdded(e)
     if not e:has(COMPONENTS.standable) then
         local gridpos = e:get(COMPONENTS.gridlocked).pos
+        local position = e:get(COMPONENTS.position).pos
+        position.x = gridpos.x * self.cellWidth
+        position.y = gridpos.y * self.cellHeight
         self.grid[gridpos.x][gridpos.y].isOccupied = true
-    -- we got a man with a position, put him on our grid!!!!!!!!!!
     end
 end
 
 function gridSystem:draw()
+    if self.stage then
+        self.stage:draw(self.cellWidth / self.tileWidth * 2, self.cellHeight / self.tileHeight * 2, 32 / 8, 32 / 8)
+    end
+
     for k, col in pairs(self.grid) do
         for n, cell in pairs(col) do
             love.graphics.setColor(1, 1, 0, 1)
@@ -116,6 +151,12 @@ end
 function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
     local newGridX, newGridY = gridlocked.pos.x + dx, gridlocked.pos.y + dy
     local oldGridX, oldGridY = gridlocked.pos.x, gridlocked.pos.y
+
+    -- -- TODO: REMOVE
+    -- local cell = self.grid[newGridX][newGridY]
+    -- print(cell.slidey)
+    -- -- TODO: REMOVE
+
     if self:cellExists(newGridX, newGridY) and not self:cellIsOccupied(newGridX, newGridY) then
         local newCellX = (newGridX) * self.cellWidth
         local newCellY = (newGridY) * self.cellHeight
@@ -161,15 +202,23 @@ function gridSystem:pushed(x, y, direction)
 end
 
 function gridSystem:stageLoaded(stage)
-    print("grid system received stage data!")
-
-    assert(stage.layers["Tile Layer 1"])
-    Util.t.print(tileLayer)
-    local cols, rows, cellWidth, cellHeight, tilesArray = readTileLayerData(stage.layers["Tile Layer 1"])
+    self.stage = stage
+    assert(stage.tilesets[1])
+    assert(stage.layers["Floor"]) --TODO: floor
+    local cols, rows, tileWidth, tileHeight, tilesArray = readTileLayerData(stage.layers["Floor"])
+    self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1])
 end
 
 function readTileLayerData(tileLayer)
-    -- local cols =
+    assert(tileLayer.data)
+    local cols = #tileLayer.data -- not 100% which one should be cols and which should be rows cause theyre same atm
+    assert(tileLayer.data[1])
+    local rows = #tileLayer.data[1]
+    assert(tileLayer.data[1][1].width)
+    assert(tileLayer.data[1][1].height)
+    local tileWidth = tileLayer.data[1][1].width
+    local tileHeight = tileLayer.data[1][1].height
+    return cols, rows, tileWidth, tileHeight, tileLayer.data
 end
 
 return gridSystem

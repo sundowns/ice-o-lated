@@ -15,9 +15,6 @@ Instance = nil
 System = nil
 Vector = nil
 Timer = nil
-Camera = nil
-
-local cam = nil
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
@@ -37,7 +34,6 @@ function love.load()
     Instance = require("lib.concord.instance")
     System = require("lib.concord.system")
     Vector = require("lib.vector")
-    Camera = require("lib.camera")
     Timer = require("lib.timer")
 
     LOGIC = require("src.logic")
@@ -46,29 +42,27 @@ function love.load()
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
     INSTANCES.world:emit("loadStage", "stage/test1.lua")
-    testRocks() -- TODO: remove
-    testBoulders() -- TODO: remove
-    cam = Camera(CONSTANTS.COLUMNS * CONSTANTS.CELL_WIDTH / 2, CONSTANTS.ROWS * CONSTANTS.CELL_HEIGHT / 2)
+    -- testRocks() -- TODO: remove
+    -- testBoulders() -- TODO: remove
 end
 
-function testRocks()
-    for i = 0, 15 do
-        local rand_x = math.random(CONSTANTS.COLUMNS)
-        local rand_y = math.random(CONSTANTS.ROWS)
+-- function testRocks()
+--     for i = 0, 15 do
+--         local rand_x = math.random(CONSTANTS.COLUMNS)
+--         local rand_y = math.random(CONSTANTS.ROWS)
 
-        INSTANCES.world:addEntity(ENTITIES.rock(rand_x, rand_y))
-    end
-end
+--         INSTANCES.world:addEntity(ENTITIES.rock(rand_x, rand_y))
+--     end
+-- end
 
-function testBoulders()
-    for i = 0, 7 do
-        local rand_x = math.random(CONSTANTS.COLUMNS)
-        local rand_y = math.random(CONSTANTS.ROWS)
+-- function testBoulders()
+--     for i = 0, 7 do
+--         local rand_x = math.random(CONSTANTS.COLUMNS)
+--         local rand_y = math.random(CONSTANTS.ROWS)
 
-        INSTANCES.world:addEntity(ENTITIES.boulder(rand_x, rand_y))
-    end
-    INSTANCES.world:addEntity(ENTITIES.switch(0, 5))
-end
+--         INSTANCES.world:addEntity(ENTITIES.boulder(rand_x, rand_y))
+--     end
+-- end
 
 function love.update(dt)
     INSTANCES.world:emit("update", dt)
@@ -76,11 +70,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    cam:attach()
-
     INSTANCES.world:emit("draw")
-
-    cam:detach()
 end
 
 function love.keyreleased(key)
