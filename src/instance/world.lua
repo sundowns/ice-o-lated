@@ -1,9 +1,10 @@
 local world = Instance()
 
-local gridSystem = SYSTEMS.grid('ello!!!')
-
 world:addEntity(ENTITIES.player)
-world:addSystem(gridSystem, "update")
+world:addEntity(ENTITIES.grid)
+
+local gridSystem = SYSTEMS.grid("ello!!!")
+
 world:addSystem(gridSystem, "draw")
 
 world:enableSystem(gridSystem, "update")

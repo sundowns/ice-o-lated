@@ -1,6 +1,6 @@
-local PATH = (...):gsub('%.init$', '')
+local PATH = (...):gsub("%.init$", "")
 
 return {
-    position = require(PATH..'.position'),
-    grid = require(PATH..'.grid')
+    position = require(PATH .. ".position"),
+    grid = require(PATH .. ".grid")
 }
