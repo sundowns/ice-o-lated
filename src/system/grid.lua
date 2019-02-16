@@ -14,7 +14,8 @@ function gridSystem:init(cols, rows, cellWidth, cellHeight)
                 x = x,
                 y = y,
                 width = self.cellWidth,
-                height = self.cellHeight
+                height = self.cellHeight,
+                isOccupied = false
             }
         end
     end

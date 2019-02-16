@@ -1,5 +1,6 @@
 local PATH = (...):gsub("%.init$", "")
 
 return {
-    player = require(PATH .. ".player")
+    player = require(PATH .. ".player"),
+    rock = require(PATH .. ".rock")
 }
