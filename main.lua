@@ -2,10 +2,14 @@ love.filesystem.setRequirePath(love.filesystem.getRequirePath()..";lib/?.lua;lib
 DEBUG = false
 CONSTANTS = nil
 
--- globals r bad do we have to
-Concord = require('lib.concord').init() -- TODO: actually use it / setup an instance
+ECS = nil
+Vector = nil
 
 function love.load()
+    ECS = require('lib.concord').init() -- TODO: actually use it / setup an instance
+    Vector = require('lib.vector')
+    Camera = require('lib.camera')
+    Timer = require('lib.timer')
     CONSTANTS = require('src.constants')
 end
 
