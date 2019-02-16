@@ -4,7 +4,7 @@ local player =
     Entity():give(COMPONENTS.sprite, playerImg):give(COMPONENTS.position, 0, 0):give(
     COMPONENTS.keyInput,
     {
-        down = {
+        keypressed = {
             w = LOGIC.move(CONSTANTS.ORIENTATIONS.UP),
             s = LOGIC.move(CONSTANTS.ORIENTATIONS.DOWN),
             a = LOGIC.move(CONSTANTS.ORIENTATIONS.LEFT),

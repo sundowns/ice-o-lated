@@ -14,7 +14,11 @@ function dir:change_dir(orientation)
     local e
     for i = 1, self.pool.size do
         e = self.pool:get(i)
-        e:get(COMPONENTS.direction).value = CONSTANTS.ORIENTATIONS[orientation]
+        local direction = e:get(COMPONENTS.direction)
+        if not direction.isActive then
+            direction.value = CONSTANTS.ORIENTATIONS[orientation]
+            direction:setActive(true)
+        end
     end
 end
 
