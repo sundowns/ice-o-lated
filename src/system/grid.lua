@@ -25,7 +25,7 @@ function gridSystem:draw()
         local grid = e:get(COMPONENTS.grid).data
         for k, col in pairs(grid) do
             for n, cell in pairs(col) do
-                love.graphics.setColor(1, 0, 0, 1)
+                love.graphics.setColor(1, 1, 0, 1)
                 love.graphics.rectangle("line", cell.x * cell.width, cell.y * cell.height, cell.width, cell.height)
             end
         end
