@@ -1,5 +1,12 @@
-local rockImg = love.graphics.newImage("asset/obstacle.png")
+return function(x, y)
+    local rockImg = love.graphics.newImage("asset/obstacle.png")
+    INSTANCES.world:emit("occupyCell", x, y)
+    local rock =
+        Entity():give(COMPONENTS.sprite, rockImg):give(
+        COMPONENTS.position,
+        x * CONSTANTS.CELL_WIDTH,
+        y * CONSTANTS.CELL_HEIGHT
+    ):apply()
 
-local rock = Entity():give(COMPONENTS.sprite, rockImg):give(COMPONENTS.position):apply()
-
-return rock
+    return rock
+end

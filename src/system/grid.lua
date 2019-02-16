@@ -21,11 +21,20 @@ function gridSystem:init(cols, rows, cellWidth, cellHeight)
     end
 end
 
+function gridSystem:occupyCell(x, y)
+    self.grid[x][y].isOccupied = true
+end
+
+function gridSystem:freeCell(x, y)
+    self.grid[x][y].isOccupied = false
+end
+
 function gridSystem:cellExists(x, y)
     return self.grid[x] and self.grid[x][y]
 end
 
 function gridSystem:entityAdded(e)
+    print("im here")
     -- we got a man with a position, put him on our grid!!!!!!!!!!
 end
 

@@ -6,7 +6,6 @@ local keyInput = SYSTEMS.keyInput()
 local renderSprite = SYSTEMS.renderSprite()
 
 world:addEntity(ENTITIES.player)
-world:addEntity(ENTITIES.rock)
 
 world:addSystem(gridSystem, "draw")
 world:addSystem(gridSystem, "update")

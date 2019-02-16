@@ -41,6 +41,16 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
+    testRocks()
+end
+
+function testRocks()
+    for i = 0, 15 do
+        local rand_x = math.random(CONSTANTS.COLUMNS)
+        local rand_y = math.random(CONSTANTS.ROWS)
+
+        INSTANCES.world:addEntity(ENTITIES.rock(rand_x, rand_y))
+    end
 end
 
 function love.update(dt)
