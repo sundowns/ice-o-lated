@@ -45,6 +45,7 @@ end
 
 function love.update(dt)
     INSTANCES.world:emit("update", dt)
+    Timer.update(dt)
 end
 
 function love.draw()

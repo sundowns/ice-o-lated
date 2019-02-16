@@ -1,7 +1,7 @@
 local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
 
 local player =
-    Entity():give(COMPONENTS.sprite, playerImg, 0, 2, 2):give(COMPONENTS.position, 0, 0):give(COMPONENTS.speed, 180):give(
+    Entity():give(COMPONENTS.sprite, playerImg, 0, 2, 2):give(COMPONENTS.position, 0, 0):give(
     COMPONENTS.keyInput,
     {
         down = {
@@ -11,6 +11,6 @@ local player =
             d = LOGIC.move(CONSTANTS.ORIENTATIONS.RIGHT)
         }
     }
-):give(COMPONENTS.playerControlled):give(COMPONENTS.direction):apply()
+):give(COMPONENTS.playerControlled):give(COMPONENTS.direction):give(COMPONENTS.gridlocked, 1, 0, 0):apply()
 
 return player
