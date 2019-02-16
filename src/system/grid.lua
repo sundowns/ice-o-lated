@@ -3,7 +3,8 @@ local gridSystem =
     {COMPONENTS.position, COMPONENTS.gridlocked, "gridbased"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"},
-    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"}
+    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"},
+    {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.pressable, "pressable"}
 )
 
 function gridSystem:init(cols, rows, cellWidth, cellHeight, tiles)
@@ -29,10 +30,28 @@ end
 
 function gridSystem:freeCell(x, y)
     self.grid[x][y].isOccupied = false
+    local e
+    for i = 1, self.pressable.size do
+        e = self.pressable:get(i)
+        local gridlocked = e:get(COMPONENTS.gridlocked)
+        if gridlocked.pos.x == x and gridlocked.pos.y == y then
+            e:get(COMPONENTS.pressable).isPressed = false
+            print("unclick")
+        end
+    end
 end
 
 function gridSystem:fillCell(x, y)
     self.grid[x][y].isOccupied = true
+    local e
+    for i = 1, self.pressable.size do
+        e = self.pressable:get(i)
+        local gridlocked = e:get(COMPONENTS.gridlocked)
+        if gridlocked.pos.x == x and gridlocked.pos.y == y then
+            e:get(COMPONENTS.pressable).isPressed = true
+            print("click")
+        end
+    end
 end
 
 function gridSystem:cellExists(x, y)
@@ -44,9 +63,11 @@ function gridSystem:cellIsOccupied(x, y)
 end
 
 function gridSystem:entityAdded(e)
-    local gridpos = e:get(COMPONENTS.gridlocked).pos
-    self.grid[gridpos.x][gridpos.y].isOccupied = true
+    if not e:has(COMPONENTS.standable) then
+        local gridpos = e:get(COMPONENTS.gridlocked).pos
+        self.grid[gridpos.x][gridpos.y].isOccupied = true
     -- we got a man with a position, put him on our grid!!!!!!!!!!
+    end
 end
 
 function gridSystem:draw()

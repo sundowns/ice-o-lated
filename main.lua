@@ -67,6 +67,7 @@ function testBoulders()
 
         INSTANCES.world:addEntity(ENTITIES.boulder(rand_x, rand_y))
     end
+    INSTANCES.world:addEntity(ENTITIES.switch(0, 5))
 end
 
 function love.update(dt)
