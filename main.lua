@@ -8,6 +8,7 @@ SYSTEMS = nil
 
 -- Libraries
 ECS = nil
+STI = nil
 Component = nil
 Entity = nil
 Instance = nil
@@ -24,6 +25,7 @@ function love.load()
     Util = require("lib.util")
     assets = require("lib.cargo").init("asset")
     anim8 = require("lib.anim8")
+    STI = require("lib.sti")
     ECS =
         require("lib.concord").init(
         {
@@ -43,7 +45,7 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
-    testRocks()
+    testRocks() -- TODO: remove
     cam = Camera(CONSTANTS.COLUMNS * CONSTANTS.CELL_WIDTH / 2, CONSTANTS.ROWS * CONSTANTS.CELL_HEIGHT / 2)
 end
 
