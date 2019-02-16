@@ -2,7 +2,8 @@ local gridSystem =
     System(
     {COMPONENTS.position, COMPONENTS.gridlocked, "gridbased"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"},
-    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"}
+    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"},
+    {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"}
 )
 
 function gridSystem:init(cols, rows, cellWidth, cellHeight)
@@ -28,6 +29,10 @@ end
 
 function gridSystem:freeCell(x, y)
     self.grid[x][y].isOccupied = false
+end
+
+function gridSystem:fillCell(x, y)
+    self.grid[x][y].isOccupied = true
 end
 
 function gridSystem:cellExists(x, y)
@@ -64,13 +69,13 @@ function gridSystem:update(dt)
 
         if gridlocked.isOrderedToMove and not gridlocked.isMoving then
             if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
-                self:moveToNewCell(-1, 0, pos, gridlocked)
+                self:moveToNewCell(-1, 0, pos, gridlocked, direction)
             elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
-                self:moveToNewCell(0, -1, pos, gridlocked)
+                self:moveToNewCell(0, -1, pos, gridlocked, direction)
             elseif direction.value == CONSTANTS.ORIENTATIONS.RIGHT then
-                self:moveToNewCell(1, 0, pos, gridlocked)
+                self:moveToNewCell(1, 0, pos, gridlocked, direction)
             elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
-                self:moveToNewCell(0, 1, pos, gridlocked)
+                self:moveToNewCell(0, 1, pos, gridlocked, direction)
             end
         end
     end
@@ -87,8 +92,9 @@ function gridSystem:move()
     end
 end
 
-function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
+function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
     local newGridX, newGridY = gridlocked.pos.x + dx, gridlocked.pos.y + dy
+    local oldGridX, oldGridY = gridlocked.pos.x, gridlocked.pos.y
     if self:cellExists(newGridX, newGridY) and not self:cellIsOccupied(newGridX, newGridY) then
         local newCellX = (newGridX) * self.cellWidth
         local newCellY = (newGridY) * self.cellHeight
@@ -99,8 +105,37 @@ function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
             gridlocked.transitionTime,
             function()
                 gridlocked:setMoving(false)
+                self:freeCell(oldGridX, oldGridY)
+                self:fillCell(newGridX, newGridY)
             end
         )
+    elseif self:cellExists(newGridX, newGridY) and self:cellIsOccupied(newGridX, newGridY) then
+        gridlocked:orderToStopMoving()
+        self:pushed(newGridX, newGridY, direction)
+    end
+end
+
+function gridSystem:pushed(x, y, direction)
+    local e
+    for i = 1, self.pushable.size do
+        e = self.pushable:get(i)
+
+        local pos = e:get(COMPONENTS.position).pos
+        local direction = e:get(COMPONENTS.direction)
+        local gridlocked = e:get(COMPONENTS.gridlocked)
+        if gridlocked.pos.x == x and gridlocked.pos.y == y then
+            if not gridlocked.isMoving then
+                if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
+                    self:moveToNewCell(-1, 0, pos, gridlocked, direction)
+                elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
+                    self:moveToNewCell(0, -1, pos, gridlocked, direction)
+                elseif direction.value == CONSTANTS.ORIENTATIONS.RIGHT then
+                    self:moveToNewCell(1, 0, pos, gridlocked, direction)
+                elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
+                    self:moveToNewCell(0, 1, pos, gridlocked, direction)
+                end
+            end
+        end
     end
 end
 

@@ -46,6 +46,7 @@ function love.load()
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
     testRocks() -- TODO: remove
+    testBoulders() -- TODO: remove
     cam = Camera(CONSTANTS.COLUMNS * CONSTANTS.CELL_WIDTH / 2, CONSTANTS.ROWS * CONSTANTS.CELL_HEIGHT / 2)
 end
 
@@ -55,6 +56,15 @@ function testRocks()
         local rand_y = math.random(CONSTANTS.ROWS)
 
         INSTANCES.world:addEntity(ENTITIES.rock(rand_x, rand_y))
+    end
+end
+
+function testBoulders()
+    for i = 0, 7 do
+        local rand_x = math.random(CONSTANTS.COLUMNS)
+        local rand_y = math.random(CONSTANTS.ROWS)
+
+        INSTANCES.world:addEntity(ENTITIES.boulder(rand_x, rand_y))
     end
 end
 

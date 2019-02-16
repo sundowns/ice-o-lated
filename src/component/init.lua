@@ -6,5 +6,6 @@ return {
     keyInput = require(PATH .. ".keyInput"),
     sprite = require(PATH .. ".sprite"),
     gridlocked = require(PATH .. ".gridlocked"),
-    playerControlled = require(PATH .. ".playerControlled")
+    playerControlled = require(PATH .. ".playerControlled"),
+    pushable = require(PATH .. ".pushable")
 }
