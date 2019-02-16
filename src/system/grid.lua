@@ -6,7 +6,7 @@ local gridSystem =
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"}
 )
 
-function gridSystem:init(cols, rows, cellWidth, cellHeight)
+function gridSystem:init(cols, rows, cellWidth, cellHeight, tiles)
     self.cols = cols
     self.rows = rows
     self.cellWidth = cellWidth
@@ -141,6 +141,14 @@ end
 
 function gridSystem:stageLoaded(stage)
     print("grid system received stage data!")
+
+    assert(stage.layers["Tile Layer 1"])
+    Util.t.print(tileLayer)
+    local cols, rows, cellWidth, cellHeight, tilesArray = readTileLayerData(stage.layers["Tile Layer 1"])
+end
+
+function readTileLayerData(tileLayer)
+    -- local cols =
 end
 
 return gridSystem
