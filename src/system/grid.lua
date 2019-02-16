@@ -25,7 +25,7 @@ function gridSystem:init(cols, rows, cellWidth, cellHeight)
     end
 end
 
-function gridSystem:occupyCell(x, y)
+function gridSystem:entityCreated(x, y)
     self.grid[x][y].isOccupied = true
 end
 
@@ -35,6 +35,10 @@ end
 
 function gridSystem:cellExists(x, y)
     return self.grid[x] and self.grid[x][y]
+end
+
+function gridSystem:cellIsOccupied(x, y)
+    return self.grid[x][y].isOccupied
 end
 
 function gridSystem:entityAdded(e)
@@ -86,9 +90,10 @@ function gridSystem:move()
 end
 
 function gridSystem:moveToNewCell(dx, dy, pos, gridlocked)
-    if self:cellExists(gridlocked.pos.x + dx, gridlocked.pos.y + dy) then
-        local newCellX = (gridlocked.pos.x + dx) * self.cellWidth
-        local newCellY = (gridlocked.pos.y + dy) * self.cellHeight
+    local newGridX, newGridY = gridlocked.pos.x + dx, gridlocked.pos.y + dy
+    if self:cellExists(newGridX, newGridY) and not self:cellIsOccupied(newGridX, newGridY) then
+        local newCellX = (newGridX) * self.cellWidth
+        local newCellY = (newGridY) * self.cellHeight
         gridlocked:translate(dx, dy)
         Timer.tween(gridlocked.transitionTime, pos, {x = newCellX, y = newCellY})
         gridlocked:orderToStopMoving()
