@@ -109,6 +109,10 @@ function gridSystem:cellIsOccupied(x, y)
     return self.grid[x][y].isOccupied
 end
 
+function gridSystem:cellIsSlidey(x, y)
+    return self.grid[x][y].slidey
+end
+
 function gridSystem:entityAdded(e)
     if not e:has(COMPONENTS.standable) then
         local gridpos = e:get(COMPONENTS.gridlocked).pos
@@ -180,7 +184,7 @@ function gridSystem:move()
         e = self.player:get(i)
 
         local gridlocked = e:get(COMPONENTS.gridlocked)
-        if not gridlocked.isOrderedToMove and not gridlocked.isMoving then
+        if not gridlocked.isOrderedToMove and not gridlocked.isMoving and not gridlocked.isSliding then
             gridlocked:orderToMove()
         end
     end
@@ -202,23 +206,36 @@ function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
                 gridlocked:setMoving(false)
                 self:freeCell(oldGridX, oldGridY)
                 self:fillCell(newGridX, newGridY)
+                if self:cellExists(newGridX, newGridY) and self:cellIsSlidey(newGridX, newGridY) then
+                    gridlocked:setSliding(true)
+                    gridlocked:orderToMove()
+                else
+                    gridlocked:setSliding(false)
+                end
             end
         )
     elseif self:cellExists(newGridX, newGridY) and self:cellIsOccupied(newGridX, newGridY) then
         gridlocked:orderToStopMoving()
-        self:pushed(newGridX, newGridY, direction)
+        if not gridlocked.isSliding then
+            self:pushed(newGridX, newGridY, direction)
+        end
+        gridlocked:setSliding(false)
+    end
+    if not self:cellExists(newGridX, newGridY) or self:cellIsOccupied(newGridX, newGridY) then
+        gridlocked:setSliding(false)
     end
 end
 
-function gridSystem:pushed(x, y, direction)
+function gridSystem:pushed(x, y, playerDirection)
     local e
     for i = 1, self.pushable.size do
         e = self.pushable:get(i)
 
-        local pos = e:get(COMPONENTS.position).pos
-        local direction = e:get(COMPONENTS.direction)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if gridlocked.pos.x == x and gridlocked.pos.y == y then
+            local pos = e:get(COMPONENTS.position).pos
+            local direction = e:get(COMPONENTS.direction)
+            direction.value = playerDirection.value
             if not gridlocked.isMoving then
                 if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
                     self:moveToNewCell(-1, 0, pos, gridlocked, direction)
