@@ -15,8 +15,4 @@ function stageManager:update(dt)
     self.CURRENT_MAP:update(dt)
 end
 
-function stageManager:draw() -- TODO: remove
-    -- self.CURRENT_MAP:draw()
-end
-
 return stageManager

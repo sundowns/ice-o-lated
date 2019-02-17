@@ -6,11 +6,8 @@ local keyInput = SYSTEMS.keyInput()
 local renderSprite = SYSTEMS.renderSprite()
 local stageManager = SYSTEMS.stageManager()
 
-world:addEntity(ENTITIES.player)
-
 -- ADD SYSTEMS
 
-world:addSystem(stageManager, "draw")
 world:addSystem(stageManager, "update")
 world:addSystem(stageManager, "loadStage")
 
@@ -30,7 +27,6 @@ world:addSystem(renderSprite, "draw")
 
 -- ENABLE SYSTEMS
 
-world:enableSystem(stageManager, "draw")
 world:enableSystem(stageManager, "update")
 world:enableSystem(stageManager, "loadStage")
 

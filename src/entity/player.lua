@@ -1,5 +1,6 @@
 local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
 
+-- TODO: 32, 32 starting pos here is a hack
 local player =
     Entity():give(COMPONENTS.sprite, playerImg):give(COMPONENTS.position, 0, 0):give(
     COMPONENTS.keyInput,
@@ -20,8 +21,8 @@ local player =
 ):give(COMPONENTS.playerControlled):give(COMPONENTS.direction):give(
     COMPONENTS.gridlocked,
     CONSTANTS.BASE_TRANSITION_SPEED,
-    0,
-    0
+    1,
+    1
 ):apply()
 
 return player
