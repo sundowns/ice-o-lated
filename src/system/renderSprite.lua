@@ -1,4 +1,4 @@
-local renderSprite = System({COMPONENTS.sprite, COMPONENTS.position})
+local renderSprite = System({COMPONENTS.sprite, COMPONENTS.position, "allSprites"})
 
 function renderSprite:init()
     self.spriteBank = {}
@@ -12,8 +12,8 @@ end
 
 function renderSprite:draw()
     local e
-    for i = 1, self.pool.size do
-        e = self.pool:get(i)
+    for i = 1, self.allSprites.size do
+        e = self.allSprites:get(i)
         local img = e:get(COMPONENTS.sprite)
         local pos = e:get(COMPONENTS.position).pos
 
@@ -66,17 +66,15 @@ function renderSprite:createInstance(spriteName, currentState)
     }
 end
 
-function renderSprite:changeSpriteState(instance, newState)
-    -- If the specified state does not exist, we cooked
-    assert(instance.sprite.layers[1][newState], "Tried to change sprite to non-existing state " .. newState)
-
-    instance.animations = self:retrieveLayerInstances(instance.sprite.id, newState)
+function renderSprite:spriteStateUpdated(entity, newState)
+    local sprite = entity:get(COMPONENTS.sprite)
+    sprite.animation.animations = self:retrieveLayerInstances(sprite.animation.sprite.id, newState)
 end
 
 function renderSprite:update(dt)
     local e
-    for i = 1, self.pool.size do
-        e = self.pool:get(i)
+    for i = 1, self.allSprites.size do
+        e = self.allSprites:get(i)
         local sprite = e:get(COMPONENTS.sprite)
         for i, layer in pairs(sprite.animation.animations) do
             layer.animation:update(dt)
@@ -93,7 +91,6 @@ end
 
 function renderSprite:retrieveLayerInstances(spriteName, currentState)
     local layers = {}
-
     for i, layer in pairs(self.spriteBank[spriteName].layers) do
         local anim_data = layer[currentState]
         table.insert(

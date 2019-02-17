@@ -1,6 +1,6 @@
 return function(x, y)
     local door =
-        Entity():give(COMPONENTS.sprite, "door", 0, 2, 2):give(
+        Entity():give(COMPONENTS.sprite, "DOOR", 0, 2, 2):give(
         COMPONENTS.position,
         x * CONSTANTS.CELL_WIDTH,
         y * CONSTANTS.CELL_HEIGHT

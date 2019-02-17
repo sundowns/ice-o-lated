@@ -1,7 +1,7 @@
 -- local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
 
 local player =
-    Entity():give(COMPONENTS.sprite, "player", 0, 4, 4):give(COMPONENTS.position, 0, 0):give(
+    Entity():give(COMPONENTS.sprite, "PLAYER", 0, 4, 4):give(COMPONENTS.position, 0, 0):give(
     COMPONENTS.keyInput,
     {
         down = {

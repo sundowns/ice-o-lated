@@ -25,6 +25,7 @@ world:addSystem(keyInput, "keyreleased")
 
 world:addSystem(renderSprite, "draw")
 world:addSystem(renderSprite, "update")
+world:addSystem(renderSprite, "spriteStateUpdated")
 
 -- ENABLE SYSTEMS
 
@@ -45,5 +46,6 @@ world:enableSystem(keyInput, "keyreleased")
 
 world:enableSystem(renderSprite, "draw")
 world:enableSystem(renderSprite, "update")
+world:enableSystem(renderSprite, "spriteStateUpdated")
 
 return world

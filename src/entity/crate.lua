@@ -1,6 +1,6 @@
 return function(x, y)
     local crate =
-        Entity():give(COMPONENTS.sprite, "crate", 0, 4, 4):give(
+        Entity():give(COMPONENTS.sprite, "CRATE", 0, 4, 4):give(
         COMPONENTS.position,
         x * CONSTANTS.CELL_WIDTH,
         y * CONSTANTS.CELL_HEIGHT
