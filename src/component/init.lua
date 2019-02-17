@@ -9,5 +9,6 @@ return {
     playerControlled = require(PATH .. ".playerControlled"),
     pushable = require(PATH .. ".pushable"),
     standable = require(PATH .. ".standable"),
+    openable = require(PATH .. ".openable"),
     pressable = require(PATH .. ".pressable")
 }

@@ -1,6 +1,5 @@
 return function(x, y)
     local boulderImg = love.graphics.newImage("asset/crate.png")
-    -- INSTANCES.world:emit("entityCreated", x, y)
     local boulder =
         Entity():give(COMPONENTS.sprite, boulderImg):give(
         COMPONENTS.position,

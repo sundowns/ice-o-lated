@@ -4,7 +4,8 @@ local gridSystem =
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, "moveable"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"},
-    {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.pressable, "pressable"}
+    {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.pressable, "pressable"},
+    {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.openable, "openable"}
 )
 
 function gridSystem:init()
@@ -78,12 +79,19 @@ end
 function gridSystem:freeCell(x, y)
     self.grid[x][y].isOccupied = false
     local e
+    local total = 0
     for i = 1, self.pressable.size do
         e = self.pressable:get(i)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if gridlocked.pos.x == x and gridlocked.pos.y == y then
             e:get(COMPONENTS.pressable).isPressed = false
-            print("unclick")
+            total = total - 1
+        end
+    end
+    if total ~= self.pressable.size then
+        local f
+        for i = 1, self.openable.size do
+            self.openable:get(i).isOpen = false
         end
     end
 end
@@ -91,12 +99,19 @@ end
 function gridSystem:fillCell(x, y)
     self.grid[x][y].isOccupied = true
     local e
+    local total = 0
     for i = 1, self.pressable.size do
         e = self.pressable:get(i)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if gridlocked.pos.x == x and gridlocked.pos.y == y then
             e:get(COMPONENTS.pressable).isPressed = true
-            print("click")
+            total = total + 1
+        end
+    end
+    if total == self.pressable.size then
+        local f
+        for i = 1, self.openable.size do
+            self.openable:get(i).isOpen = true
         end
     end
 end
