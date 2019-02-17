@@ -202,13 +202,13 @@ function gridSystem:update(dt)
 
         if gridlocked.isOrderedToMove and not gridlocked.isMoving then
             if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
-                self:moveToNewCell(-1, 0, pos, gridlocked, direction)
+                self:moveToNewCell(-1, 0, e)
             elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
-                self:moveToNewCell(0, -1, pos, gridlocked, direction)
+                self:moveToNewCell(0, -1, e)
             elseif direction.value == CONSTANTS.ORIENTATIONS.RIGHT then
-                self:moveToNewCell(1, 0, pos, gridlocked, direction)
+                self:moveToNewCell(1, 0, e)
             elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
-                self:moveToNewCell(0, 1, pos, gridlocked, direction)
+                self:moveToNewCell(0, 1, e)
             end
         end
 
@@ -220,6 +220,7 @@ function gridSystem:update(dt)
                 if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
                     if f:has(COMPONENTS.isGoal) then
                         print("you win nerd")
+                    -- TODO: trigger next level (on a timer after a 'woo u did it message?')
                     end
                 end
             end
@@ -238,7 +239,10 @@ function gridSystem:move()
     end
 end
 
-function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
+function gridSystem:moveToNewCell(dx, dy, entity)
+    local gridlocked = entity:get(COMPONENTS.gridlocked)
+    local direction = entity:get(COMPONENTS.direction)
+    local pos = entity:get(COMPONENTS.position).pos
     local newGridX, newGridY = gridlocked.pos.x + dx, gridlocked.pos.y + dy
     local oldGridX, oldGridY = gridlocked.pos.x, gridlocked.pos.y
 
@@ -254,11 +258,17 @@ function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
                 gridlocked:setMoving(false)
                 self:freeCell(oldGridX, oldGridY)
                 self:fillCell(newGridX, newGridY)
-                if self:cellExists(newGridX, newGridY) and self:cellIsSlidey(newGridX, newGridY) then
-                    gridlocked:setSliding(true)
+                local sliding = self:cellIsSlidey(newGridX, newGridY)
+                gridlocked:setSliding(sliding)
+                if sliding then
                     gridlocked:orderToMove()
-                else
-                    gridlocked:setSliding(false)
+                end
+                if entity:has(COMPONENTS.playerControlled) and entity:has(COMPONENTS.sprite) then
+                    if sliding then
+                        INSTANCES.world:emit("spriteStateUpdated", entity, "SLIDE")
+                    else
+                        INSTANCES.world:emit("spriteStateUpdated", entity, "STAND")
+                    end
                 end
             end
         )
@@ -286,13 +296,13 @@ function gridSystem:pushed(x, y, playerDirection)
             direction.value = playerDirection.value
             if not gridlocked.isMoving then
                 if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
-                    self:moveToNewCell(-1, 0, pos, gridlocked, direction)
+                    self:moveToNewCell(-1, 0, e)
                 elseif direction.value == CONSTANTS.ORIENTATIONS.UP then
-                    self:moveToNewCell(0, -1, pos, gridlocked, direction)
+                    self:moveToNewCell(0, -1, e)
                 elseif direction.value == CONSTANTS.ORIENTATIONS.RIGHT then
-                    self:moveToNewCell(1, 0, pos, gridlocked, direction)
+                    self:moveToNewCell(1, 0, e)
                 elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
-                    self:moveToNewCell(0, 1, pos, gridlocked, direction)
+                    self:moveToNewCell(0, 1, e)
                 end
             end
         end

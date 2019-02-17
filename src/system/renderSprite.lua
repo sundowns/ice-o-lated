@@ -66,11 +66,9 @@ function renderSprite:createInstance(spriteName, currentState)
     }
 end
 
-function renderSprite:changeSpriteState(instance, newState)
-    -- If the specified state does not exist, we cooked
-    assert(instance.sprite.layers[1][newState], "Tried to change sprite to non-existing state " .. newState)
-
-    instance.animations = self:retrieveLayerInstances(instance.sprite.id, newState)
+function renderSprite:spriteStateUpdated(entity, newState)
+    local sprite = entity:get(COMPONENTS.sprite)
+    sprite.animation.animations = self:retrieveLayerInstances(sprite.animation.sprite.id, newState)
 end
 
 function renderSprite:update(dt)
@@ -93,7 +91,6 @@ end
 
 function renderSprite:retrieveLayerInstances(spriteName, currentState)
     local layers = {}
-
     for i, layer in pairs(self.spriteBank[spriteName].layers) do
         local anim_data = layer[currentState]
         table.insert(
