@@ -1,4 +1,8 @@
-local renderSprite = System({COMPONENTS.sprite, COMPONENTS.position, "allSprites"})
+local renderSprite =
+    System(
+    {COMPONENTS.sprite, COMPONENTS.position, "allSprites"},
+    {COMPONENTS.sprite, COMPONENTS.position, COMPONENTS.pressable, "switches"}
+)
 
 function renderSprite:init()
     self.spriteBank = {}
@@ -11,22 +15,32 @@ function renderSprite:entityAdded(e)
 end
 
 function renderSprite:draw()
+    for i = 1, self.switches.size do
+        self:drawEntity(self.switches:get(i))
+    end
+
     local e
     for i = 1, self.allSprites.size do
         e = self.allSprites:get(i)
-        local img = e:get(COMPONENTS.sprite)
-        local pos = e:get(COMPONENTS.position).pos
-
-        if img.visible then
-            love.graphics.setColor(1, 1, 1, 1)
-            self:drawSpriteInstance(
-                img.animation,
-                Vector(WORLD_OFFSET.x + pos.x, WORLD_OFFSET.y + pos.y),
-                0,
-                img.sx,
-                img.sy
-            )
+        if not e:has(COMPONENTS.pressable) then
+            self:drawEntity(e)
         end
+    end
+end
+
+function renderSprite:drawEntity(entity)
+    local img = entity:get(COMPONENTS.sprite)
+    local pos = entity:get(COMPONENTS.position).pos
+
+    if img.visible then
+        love.graphics.setColor(1, 1, 1, 1)
+        self:drawSpriteInstance(
+            img.animation,
+            Vector(WORLD_OFFSET.x + pos.x, WORLD_OFFSET.y + pos.y),
+            0,
+            img.sx,
+            img.sy
+        )
     end
 end
 
