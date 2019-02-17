@@ -1,5 +1,5 @@
 return function(x, y)
-    local doorImg = love.graphics.newImage("asset/obstacle.png")
+    local doorImg = love.graphics.newImage("asset/door.png")
     local door =
         Entity():give(COMPONENTS.sprite, doorImg):give(
         COMPONENTS.position,

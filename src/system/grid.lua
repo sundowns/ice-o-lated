@@ -70,6 +70,8 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
             INSTANCES.world:addEntity(ENTITIES.rock(gridX, gridY))
         elseif object.type == "Switch" then
             INSTANCES.world:addEntity(ENTITIES.switch(gridX, gridY))
+        elseif object.type == "Door" then
+            INSTANCES.world:addEntity(ENTITIES.door(gridX, gridY))
         end
     end
 
@@ -85,13 +87,17 @@ function gridSystem:freeCell(x, y)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if gridlocked.pos.x == x and gridlocked.pos.y == y then
             e:get(COMPONENTS.pressable).isPressed = false
-            total = total - 1
+            total = total + 1
         end
     end
-    if total ~= self.pressable.size then
-        local f
+    if total == self.pressable.size then -- Check if all switches are pressed
+        local f, pos
         for i = 1, self.openable.size do
-            self.openable:get(i).isOpen = false
+            f = self.openable:get(i)
+            pos = f:get(COMPONENTS.gridlocked).pos
+            f.isOpen = false
+            f:get(COMPONENTS.sprite).visible = true
+            self:fillCell(pos.x, pos.y)
         end
     end
 end
@@ -108,10 +114,14 @@ function gridSystem:fillCell(x, y)
             total = total + 1
         end
     end
-    if total == self.pressable.size then
-        local f
+    if total == self.pressable.size then -- Check if all switches are pressed
+        local f, pos
         for i = 1, self.openable.size do
-            self.openable:get(i).isOpen = true
+            f = self.openable:get(i)
+            pos = f:get(COMPONENTS.gridlocked).pos
+            f.isOpen = true
+            f:get(COMPONENTS.sprite).visible = false
+            self:freeCell(pos.x, pos.y)
         end
     end
 end

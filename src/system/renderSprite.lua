@@ -7,8 +7,10 @@ function renderSprite:draw()
         local img = e:get(COMPONENTS.sprite)
         local pos = e:get(COMPONENTS.position).pos
 
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(img.sprite, WORLD_OFFSET.x + pos.x, WORLD_OFFSET.y + pos.y, img.rot, img.sx, img.sy)
+        if img.visible then
+            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.draw(img.sprite, WORLD_OFFSET.x + pos.x, WORLD_OFFSET.y + pos.y, img.rot, img.sx, img.sy)
+        end
     end
 end
 

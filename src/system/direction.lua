@@ -9,7 +9,6 @@ function dir:changeDirection(orientation)
         if not gridlocked.isSliding then
             direction.value = CONSTANTS.ORIENTATIONS[orientation]
         end
-        print(gridlocked.isSliding)
     end
 end
 

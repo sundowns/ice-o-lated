@@ -7,6 +7,7 @@ local sprite =
         local width, height = inSprite:getWidth(), inSprite:getHeight()
         e.sx = sx or CONSTANTS.CELL_WIDTH / width
         e.sy = sy or CONSTANTS.CELL_HEIGHT / height
+        e.visible = true
     end
 )
 
