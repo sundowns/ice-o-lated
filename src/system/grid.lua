@@ -61,8 +61,8 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
     end
 
     for i, object in ipairs(objects) do
-        local gridX = object.worldX / self.tileWidth
-        local gridY = object.worldY / self.tileHeight
+        local gridX = (object.worldX / self.tileWidth) + 1
+        local gridY = (object.worldY / self.tileHeight)
         if object.type == "Crate" then
             INSTANCES.world:addEntity(ENTITIES.boulder(gridX, gridY))
         elseif object.type == "Rock" then
