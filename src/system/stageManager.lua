@@ -6,11 +6,13 @@ function stageManager:init()
     self.current_stage = nil
     self.stages = {
         "test1.lua",
-        "test2.lua"
+        "test2.lua",
+        "test3.lua"
     }
 end
 
 function stageManager:loadStage(path)
+    INSTANCES.world:disableUpdates()
     self.current_stage = STI(STAGES_PATH .. self.stages[self.current_stage_index])
     INSTANCES.world:clear()
     Timer.clear()

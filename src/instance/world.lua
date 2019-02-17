@@ -31,25 +31,37 @@ world:addSystem(renderSprite, "spriteStateUpdated")
 
 -- ENABLE SYSTEMS
 
-world:enableSystem(stageManager, "update")
 world:enableSystem(stageManager, "nextStage")
 world:enableSystem(stageManager, "goalReached")
 world:enableSystem(stageManager, "restartStage")
 
 world:enableSystem(gridSystem, "draw")
-world:enableSystem(gridSystem, "update")
 world:enableSystem(gridSystem, "move")
 world:enableSystem(gridSystem, "entityCreated")
 world:enableSystem(gridSystem, "stageLoaded")
 
 world:enableSystem(dir, "changeDirection")
 
-world:enableSystem(keyInput, "update")
 world:enableSystem(keyInput, "keypressed")
 world:enableSystem(keyInput, "keyreleased")
 
 world:enableSystem(renderSprite, "draw")
-world:enableSystem(renderSprite, "update")
 world:enableSystem(renderSprite, "spriteStateUpdated")
+
+function world:enableUpdates()
+    world:enableSystem(stageManager, "update")
+    world:enableSystem(gridSystem, "update")
+    world:enableSystem(keyInput, "update")
+    world:enableSystem(renderSprite, "update")
+end
+
+function world:disableUpdates()
+    world:disableSystem(stageManager, "update")
+    world:disableSystem(gridSystem, "update")
+    world:disableSystem(keyInput, "update")
+    world:disableSystem(renderSprite, "update")
+end
+
+world:enableUpdates()
 
 return world

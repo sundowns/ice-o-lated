@@ -214,8 +214,9 @@ function gridSystem:update(dt)
 
         if e:has(COMPONENTS.playerControlled) then
             local f
-            for j = 1, self.standable.size do
+            for j = self.standable.size, 1, -1 do
                 f = self.standable:get(j)
+
                 standable_pos = f:get(COMPONENTS.gridlocked).pos
                 if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
                     if f:has(COMPONENTS.isGoal) then
@@ -330,6 +331,8 @@ function gridSystem:stageLoaded(stage)
         stage.tilesets[1],
         objects
     )
+
+    INSTANCES.world:enableUpdates()
 end
 
 function readTileLayerData(tileLayer)
