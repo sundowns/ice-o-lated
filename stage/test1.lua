@@ -8,8 +8,8 @@ return {
   height = 10,
   tilewidth = 8,
   tileheight = 8,
-  nextlayerid = 2,
-  nextobjectid = 1,
+  nextlayerid = 4,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -77,6 +77,12 @@ return {
           id = 16,
           properties = {
             ["SLIDEY"] = true
+          }
+        },
+        {
+          id = 17,
+          properties = {
+            ["SLIDEY"] = false
           }
         },
         {
@@ -152,6 +158,18 @@ return {
           }
         },
         {
+          id = 66,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 67,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
           id = 68,
           properties = {
             ["SLIDEY"] = true
@@ -167,6 +185,12 @@ return {
           id = 70,
           properties = {
             ["SLIDEY"] = true
+          }
+        },
+        {
+          id = 71,
+          properties = {
+            ["SLIDEY"] = false
           }
         },
         {
@@ -209,6 +233,12 @@ return {
           id = 86,
           properties = {
             ["SLIDEY"] = true
+          }
+        },
+        {
+          id = 87,
+          properties = {
+            ["SLIDEY"] = false
           }
         },
         {
@@ -330,6 +360,204 @@ return {
           properties = {
             ["SLIDEY"] = true
           }
+        },
+        {
+          id = 132,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 133,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 134,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 135,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 145,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 146,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 147,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 148,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 149,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 150,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 151,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 160,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 161,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 162,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 163,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 164,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 165,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 166,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 167,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 176,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 177,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 178,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 179,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 180,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 181,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 182,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 192,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 193,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 194,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 195,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 196,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 197,
+          properties = {
+            ["SLIDEY"] = false
+          }
+        },
+        {
+          id = 198,
+          properties = {
+            ["SLIDEY"] = false
+          }
         }
       }
     }
@@ -350,16 +578,70 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        4, 5, 5, 5, 5, 5, 5, 6, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        20, 21, 21, 21, 21, 21, 21, 22, 134, 135,
-        36, 37, 37, 37, 37, 37, 37, 38, 134, 135,
-        134, 135, 134, 134, 134, 134, 134, 134, 134, 135,
-        134, 134, 134, 134, 134, 134, 134, 134, 134, 135
+        1, 2, 2, 2, 2, 2, 2, 2, 3, 81,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        17, 68, 68, 68, 68, 68, 68, 68, 19, 97,
+        33, 34, 34, 34, 34, 34, 34, 34, 35, 97,
+        81, 81, 81, 81, 81, 81, 81, 81, 81, 81,
+        97, 97, 97, 97, 97, 97, 97, 97, 97, 97
+      }
+    },
+    {
+      type = "tilelayer",
+      id = 2,
+      name = "Cosmetic",
+      x = 0,
+      y = 0,
+      width = 10,
+      height = 10,
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      encoding = "lua",
+      data = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 145, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      }
+    },
+    {
+      type = "objectgroup",
+      id = 3,
+      name = "Objects",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 3,
+          name = "",
+          type = "Crate",
+          shape = "rectangle",
+          x = 40,
+          y = 32,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 121,
+          visible = true,
+          properties = {}
+        }
       }
     }
   }

@@ -36,6 +36,11 @@
    <property name="SLIDEY" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="17">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
  <tile id="18">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
@@ -96,6 +101,16 @@
    <property name="SLIDEY" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="66">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="67">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
  <tile id="68">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
@@ -109,6 +124,11 @@
  <tile id="70">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="71">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="80">
@@ -144,6 +164,11 @@
  <tile id="86">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="87">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="96">
@@ -244,6 +269,171 @@
  <tile id="131">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="132">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="133">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="134">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="135">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="145">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="146">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="147">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="148">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="149">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="150">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="151">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="160">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="161">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="162">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="163">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="164">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="165">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="166">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="167">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="176">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="177">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="178">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="179">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="180">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="181">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="182">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="192">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="193">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="194">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="195">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="196">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="197">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="198">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
 </tileset>

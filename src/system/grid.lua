@@ -18,7 +18,7 @@ function gridSystem:init()
     self.stage = nil
 end
 
-function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cellHeight, tiles, tileSet)
+function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cellHeight, tiles, tileSet, objects)
     self.cols = cols
     self.rows = rows
     self.tileWidth = tileWidth
@@ -28,13 +28,21 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
     self.tileSet = tileSet
     self.grid = {}
 
-    Util.t.print(self.tileSet)
-    Util.t.print(tiles[1][1])
+    function getTileById(tiles, id)
+        local result = nil
+        for i, v in ipairs(tiles) do
+            if id == v.id then
+                result = v
+            end
+        end
+        return result
+    end
+
     for x = 1, self.cols do
         self.grid[x] = {}
         for y = 1, self.rows do
-            assert(tiles[x][y])
-            local tileType = tileSet.tiles[tiles[x][y].id]
+            assert(tiles[y][x])
+            local tileType = getTileById(tileSet.tiles, tiles[y][x].id)
 
             local slidey = false
             if tileType and tileType.properties and tileType.properties.SLIDEY then
@@ -46,14 +54,19 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
                 y = y,
                 width = self.cellWidth,
                 height = self.cellHeight,
-                tileQuad = tiles[x][y].quad,
                 isOccupied = false,
                 slidey = slidey
             }
         end
     end
 
-    INSTANCES.world:emit("gridCreated", Vector(self.cols * self.cellWidth / 2, self.rows * self.cellHeight / 2))
+    for i, object in ipairs(objects) do
+        Util.t.print(object)
+        local gridX = object.worldX / self.tileWidth
+        local gridY = object.worldY / self.tileHeight
+        INSTANCES.world:addEntity(ENTITIES.rock(gridX, gridY))
+    end
+
     INSTANCES.world:addEntity(ENTITIES.player)
 end
 
@@ -103,7 +116,18 @@ end
 
 function gridSystem:draw()
     if self.stage then
-        self.stage:draw(self.cellWidth / self.tileWidth * 2, self.cellHeight / self.tileHeight * 2, 32 / 8, 32 / 8)
+        love.graphics.push()
+        love.graphics.translate(self.cellWidth / self.tileWidth + 28, self.cellHeight / self.tileHeight + 28) -- fuck this & fuck u
+        love.graphics.scale(self.cellWidth / self.tileWidth, self.cellHeight / self.tileHeight)
+        if self.stage.layers["Floor"] then
+            self.stage.layers["Floor"]:draw()
+        end
+
+        if self.stage.layers["Cosmetic"] then
+            self.stage.layers["Cosmetic"]:draw()
+        end
+
+        love.graphics.pop()
     end
 
     for k, col in pairs(self.grid) do
@@ -151,11 +175,6 @@ end
 function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
     local newGridX, newGridY = gridlocked.pos.x + dx, gridlocked.pos.y + dy
     local oldGridX, oldGridY = gridlocked.pos.x, gridlocked.pos.y
-
-    -- -- TODO: REMOVE
-    -- local cell = self.grid[newGridX][newGridY]
-    -- print(cell.slidey)
-    -- -- TODO: REMOVE
 
     if self:cellExists(newGridX, newGridY) and not self:cellIsOccupied(newGridX, newGridY) then
         local newCellX = (newGridX) * self.cellWidth
@@ -206,7 +225,8 @@ function gridSystem:stageLoaded(stage)
     assert(stage.tilesets[1])
     assert(stage.layers["Floor"]) --TODO: floor
     local cols, rows, tileWidth, tileHeight, tilesArray = readTileLayerData(stage.layers["Floor"])
-    self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1])
+    local objects = readObjectLayerData(stage.layers["Objects"])
+    self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1], objects)
 end
 
 function readTileLayerData(tileLayer)
@@ -219,6 +239,25 @@ function readTileLayerData(tileLayer)
     local tileWidth = tileLayer.data[1][1].width
     local tileHeight = tileLayer.data[1][1].height
     return cols, rows, tileWidth, tileHeight, tileLayer.data
+end
+
+function readObjectLayerData(objectLayer)
+    assert(objectLayer.objects)
+
+    local objects = {}
+
+    for i, object in pairs(objectLayer.objects) do
+        assert(object.type)
+        table.insert(
+            objects,
+            {
+                type = object.type,
+                worldX = object.x,
+                worldY = object.y
+            }
+        )
+    end
+    return objects
 end
 
 return gridSystem
