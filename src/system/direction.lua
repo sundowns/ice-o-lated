@@ -6,8 +6,11 @@ function dir:changeDirection(orientation)
         e = self.pool:get(i)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         local direction = e:get(COMPONENTS.direction)
+
         if not gridlocked.isSliding then
-            direction.value = CONSTANTS.ORIENTATIONS[orientation]
+            if orientation ~= direction.value then
+                direction.value = CONSTANTS.ORIENTATIONS[orientation]
+            end
         end
     end
 end

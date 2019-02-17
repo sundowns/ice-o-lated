@@ -1,36 +1,36 @@
-local renderSprite =
+local spriteRenderer =
     System(
     {COMPONENTS.sprite, COMPONENTS.position, "allSprites"},
     {COMPONENTS.sprite, COMPONENTS.position, COMPONENTS.pressable, "switches"}
 )
 
-function renderSprite:init()
+function spriteRenderer:init()
     self.spriteBank = {}
 end
 
-function renderSprite:entityAdded(e)
+function spriteRenderer:entityAdded(e)
     local sprite = e:get(COMPONENTS.sprite)
     local instance = self:createInstance(sprite.name)
     sprite:setAnimationData(instance)
 end
 
-function renderSprite:draw()
+function spriteRenderer:draw()
     for i = 1, self.switches.size do
         self:drawEntity(self.switches:get(i))
     end
 
-    local e
     for i = 1, self.allSprites.size do
-        e = self.allSprites:get(i)
+        local e = self.allSprites:get(i)
         if not e:has(COMPONENTS.pressable) then
             self:drawEntity(e)
         end
     end
 end
 
-function renderSprite:drawEntity(entity)
+function spriteRenderer:drawEntity(entity)
     local img = entity:get(COMPONENTS.sprite)
     local pos = entity:get(COMPONENTS.position).pos
+    local direction = entity:get(COMPONENTS.direction)
 
     if img.visible then
         love.graphics.setColor(1, 1, 1, 1)
@@ -44,7 +44,7 @@ function renderSprite:drawEntity(entity)
     end
 end
 
-function renderSprite:loadSpriteSheet(spriteName)
+function spriteRenderer:loadSpriteSheet(spriteName)
     local err, sprite_file
     sprite_file, err = love.filesystem.load("src/animation/" .. string.lower(spriteName) .. ".lua")
     if not sprite_file then
@@ -56,7 +56,7 @@ function renderSprite:loadSpriteSheet(spriteName)
     return self.spriteBank[spriteName]
 end
 
-function renderSprite:createInstance(spriteName, currentState)
+function spriteRenderer:createInstance(spriteName, currentState)
     if spriteName == nil then
         return nil
     end
@@ -80,15 +80,14 @@ function renderSprite:createInstance(spriteName, currentState)
     }
 end
 
-function renderSprite:spriteStateUpdated(entity, newState)
+function spriteRenderer:spriteStateUpdated(entity, newState)
     local sprite = entity:get(COMPONENTS.sprite)
     sprite.animation.animations = self:retrieveLayerInstances(sprite.animation.sprite.id, newState)
 end
 
-function renderSprite:update(dt)
-    local e
+function spriteRenderer:update(dt)
     for i = 1, self.allSprites.size do
-        e = self.allSprites:get(i)
+        local e = self.allSprites:get(i)
         local sprite = e:get(COMPONENTS.sprite)
         for i, layer in pairs(sprite.animation.animations) do
             layer.animation:update(dt)
@@ -96,14 +95,14 @@ function renderSprite:update(dt)
     end
 end
 
-function renderSprite:drawSpriteInstance(instance, position, orientation, sx, sy)
+function spriteRenderer:drawSpriteInstance(instance, position, orientation, sx, sy)
     for i, layer in pairs(instance.animations) do
         local w, h = layer.animation:getDimensions()
         layer.animation:draw(instance.sprite.image, position.x, position.y, orientation or 0, sx, sy)
     end
 end
 
-function renderSprite:retrieveLayerInstances(spriteName, currentState)
+function spriteRenderer:retrieveLayerInstances(spriteName, currentState)
     local layers = {}
     for i, layer in pairs(self.spriteBank[spriteName].layers) do
         local anim_data = layer[currentState]
@@ -115,7 +114,7 @@ function renderSprite:retrieveLayerInstances(spriteName, currentState)
                     anim_data.frame_duration
                 ),
                 origin = Vector(anim_data.offset_x, anim_data.offset_y),
-                -- rotation = anim_data.rotation,
+                rotation = anim_data.rotation,
                 scale = Vector(anim_data.scale_x or 1, anim_data.scale_y or 1)
             }
         )
@@ -124,4 +123,4 @@ function renderSprite:retrieveLayerInstances(spriteName, currentState)
     return layers
 end
 
-return renderSprite
+return spriteRenderer

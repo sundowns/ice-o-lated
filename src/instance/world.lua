@@ -3,7 +3,7 @@ local world = Instance()
 local gridSystem = SYSTEMS.grid()
 local dir = SYSTEMS.direction()
 local keyInput = SYSTEMS.keyInput()
-local renderSprite = SYSTEMS.renderSprite()
+local spriteRenderer = SYSTEMS.spriteRenderer()
 local stageManager = SYSTEMS.stageManager()
 
 -- ADD SYSTEMS
@@ -25,9 +25,9 @@ world:addSystem(keyInput, "update")
 world:addSystem(keyInput, "keypressed")
 world:addSystem(keyInput, "keyreleased")
 
-world:addSystem(renderSprite, "draw")
-world:addSystem(renderSprite, "update")
-world:addSystem(renderSprite, "spriteStateUpdated")
+world:addSystem(spriteRenderer, "draw")
+world:addSystem(spriteRenderer, "update")
+world:addSystem(spriteRenderer, "spriteStateUpdated")
 
 -- ENABLE SYSTEMS
 
@@ -45,21 +45,20 @@ world:enableSystem(dir, "changeDirection")
 world:enableSystem(keyInput, "keypressed")
 world:enableSystem(keyInput, "keyreleased")
 
-world:enableSystem(renderSprite, "draw")
-world:enableSystem(renderSprite, "spriteStateUpdated")
-
+world:enableSystem(spriteRenderer, "draw")
+world:enableSystem(spriteRenderer, "spriteStateUpdated")
 function world:enableUpdates()
     world:enableSystem(stageManager, "update")
     world:enableSystem(gridSystem, "update")
     world:enableSystem(keyInput, "update")
-    world:enableSystem(renderSprite, "update")
+    world:enableSystem(spriteRenderer, "update")
 end
 
 function world:disableUpdates()
     world:disableSystem(stageManager, "update")
     world:disableSystem(gridSystem, "update")
     world:disableSystem(keyInput, "update")
-    world:disableSystem(renderSprite, "update")
+    world:disableSystem(spriteRenderer, "update")
 end
 
 world:enableUpdates()

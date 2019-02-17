@@ -7,4 +7,10 @@ function logic.move(orientation)
     end
 end
 
+function logic.continueMove(orientation)
+    return function()
+        INSTANCES.world:emit("move")
+    end
+end
+
 return logic
