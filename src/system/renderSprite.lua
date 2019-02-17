@@ -1,4 +1,4 @@
-local renderSprite = System({COMPONENTS.sprite, COMPONENTS.position})
+local renderSprite = System({COMPONENTS.sprite, COMPONENTS.position, "allSprites"})
 
 function renderSprite:init()
     self.spriteBank = {}
@@ -12,8 +12,8 @@ end
 
 function renderSprite:draw()
     local e
-    for i = 1, self.pool.size do
-        e = self.pool:get(i)
+    for i = 1, self.allSprites.size do
+        e = self.allSprites:get(i)
         local img = e:get(COMPONENTS.sprite)
         local pos = e:get(COMPONENTS.position).pos
 
@@ -75,8 +75,8 @@ end
 
 function renderSprite:update(dt)
     local e
-    for i = 1, self.pool.size do
-        e = self.pool:get(i)
+    for i = 1, self.allSprites.size do
+        e = self.allSprites:get(i)
         local sprite = e:get(COMPONENTS.sprite)
         for i, layer in pairs(sprite.animation.animations) do
             layer.animation:update(dt)
