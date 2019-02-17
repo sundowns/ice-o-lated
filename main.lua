@@ -43,7 +43,7 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
-    INSTANCES.world:emit("loadStage", "stage/test1.lua")
+    INSTANCES.world:emit("nextStage")
 end
 
 function love.update(dt)
@@ -65,7 +65,8 @@ function love.keypressed(key)
     elseif key == "escape" then
         love.event.quit()
     elseif key == "space" then
-        love.event.quit("restart")
+        -- love.event.quit("restart")
+        INSTANCES.world:emit("nextStage")
     end
     INSTANCES.world:emit("keypressed", key)
 end

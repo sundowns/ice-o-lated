@@ -78,7 +78,7 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
         end
     end
 
-    INSTANCES.world:addEntity(ENTITIES.player)
+    INSTANCES.world:addEntity(ENTITIES.player())
 end
 
 function gridSystem:evaluateAllSwitches()
