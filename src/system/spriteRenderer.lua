@@ -1,8 +1,7 @@
 local spriteRenderer =
     System(
     {COMPONENTS.sprite, COMPONENTS.position, "allSprites"},
-    {COMPONENTS.sprite, COMPONENTS.position, COMPONENTS.pressable, "switches"},
-    {COMPONENTS.sprite, COMPONENTS.direction, COMPONENTS.rotatable, COMPONENTS.gridlocked, "rotatables"}
+    {COMPONENTS.sprite, COMPONENTS.position, COMPONENTS.pressable, "switches"}
 )
 
 function spriteRenderer:init()
@@ -33,20 +32,13 @@ function spriteRenderer:drawEntity(entity)
     local pos = entity:get(COMPONENTS.position).pos
     local direction = entity:get(COMPONENTS.direction)
 
-    local sx = img.sx
-    local rotationalOffsetX = 0
-    local rotatable = entity:get(COMPONENTS.rotatable)
-    if rotatable then
-        sx = sx * rotatable.sxModifier
-    end
-
     if img.visible then
         love.graphics.setColor(1, 1, 1, 1)
         self:drawSpriteInstance(
             img.animation,
-            Vector(WORLD_OFFSET.x + pos.x + rotationalOffsetX, WORLD_OFFSET.y + pos.y),
+            Vector(WORLD_OFFSET.x + pos.x, WORLD_OFFSET.y + pos.y),
             0,
-            sx,
+            img.sx,
             img.sy
         )
     end
@@ -99,23 +91,6 @@ function spriteRenderer:update(dt)
         local sprite = e:get(COMPONENTS.sprite)
         for i, layer in pairs(sprite.animation.animations) do
             layer.animation:update(dt)
-        end
-    end
-
-    for i = 1, self.rotatables.size do
-        local e = self.rotatables:get(i)
-        local rotatable = e:get(COMPONENTS.rotatable)
-        rotatable.flipTimer:update(dt)
-    end
-end
-
-function spriteRenderer:triggerRotation(gridX, gridY)
-    print("!")
-    for i = 1, self.rotatables.size do
-        local e = self.rotatables:get(i)
-        local gridlocked = e:get(COMPONENTS.gridlocked)
-        if gridlocked.pos.x == gridX and gridlocked.pos.y == gridY then
-            e:get(COMPONENTS.rotatable):trigger()
         end
     end
 end

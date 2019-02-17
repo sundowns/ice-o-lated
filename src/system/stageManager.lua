@@ -7,6 +7,7 @@ function stageManager:init()
     self.stages = {
         "tutorial01.lua",
         "tutorial03.lua",
+        "tutorial02.lua",
         "test2.lua",
         "test1.lua",
         "test3.lua"
@@ -33,6 +34,8 @@ end
 
 function stageManager:goalReached()
     -- probs some other shit idk
+    love.keyboard.setKeyRepeat(false)
+    love.keyboard.setKeyRepeat(true)
     self:nextStage()
 end
 

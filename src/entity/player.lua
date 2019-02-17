@@ -25,7 +25,7 @@ return function(x, y)
         CONSTANTS.BASE_TRANSITION_SPEED,
         x,
         y
-    ):give(COMPONENTS.rotatable):apply()
+    ):apply()
 
     return player
 end

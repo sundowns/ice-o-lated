@@ -8,16 +8,9 @@ function dir:changeDirection(orientation)
         local direction = e:get(COMPONENTS.direction)
 
         if not gridlocked.isSliding then
-            local sprite = e:get(COMPONENTS.sprite)
-            print(orientation)
-            print(direction.value)
-            if
-                sprite and orientation ~= direction.value and orientation ~= CONSTANTS.ORIENTATIONS["UP"] and
-                    orientation ~= CONSTANTS.ORIENTATIONS["DOWN"]
-             then
-                INSTANCES.world:emit("triggerRotation", gridlocked.pos.x, gridlocked.pos.y)
+            if orientation ~= direction.value then
+                direction.value = CONSTANTS.ORIENTATIONS[orientation]
             end
-            direction.value = CONSTANTS.ORIENTATIONS[orientation]
         end
     end
 end

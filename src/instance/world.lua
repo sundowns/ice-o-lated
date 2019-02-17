@@ -28,7 +28,6 @@ world:addSystem(keyInput, "keyreleased")
 world:addSystem(spriteRenderer, "draw")
 world:addSystem(spriteRenderer, "update")
 world:addSystem(spriteRenderer, "spriteStateUpdated")
-world:addSystem(spriteRenderer, "triggerRotation")
 
 -- ENABLE SYSTEMS
 
@@ -48,8 +47,6 @@ world:enableSystem(keyInput, "keyreleased")
 
 world:enableSystem(spriteRenderer, "draw")
 world:enableSystem(spriteRenderer, "spriteStateUpdated")
-world:enableSystem(spriteRenderer, "triggerRotation")
-
 function world:enableUpdates()
     world:enableSystem(stageManager, "update")
     world:enableSystem(gridSystem, "update")
