@@ -1,8 +1,7 @@
-local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
+-- local playerImg = love.graphics.newImage("asset/blob-skull-dark.png")
 
--- TODO: 32, 32 starting pos here is a hack
 local player =
-    Entity():give(COMPONENTS.sprite, playerImg):give(COMPONENTS.position, 0, 0):give(
+    Entity():give(COMPONENTS.sprite, "player", 0, 4, 4):give(COMPONENTS.position, 0, 0):give(
     COMPONENTS.keyInput,
     {
         down = {

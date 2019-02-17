@@ -6,5 +6,5 @@ return {
     rock = require(PATH .. ".rock"),
     door = require(PATH .. ".door"),
     goal = require(PATH .. ".goal"),
-    boulder = require(PATH .. ".boulder")
+    crate = require(PATH .. ".crate")
 }
