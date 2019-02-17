@@ -43,7 +43,7 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
-    INSTANCES.world:emit("loadStage", "stage/test2.lua")
+    INSTANCES.world:emit("loadStage", "stage/test1.lua")
 end
 
 function love.update(dt)
