@@ -4,7 +4,7 @@ assert(anim8)
 return {
     id = "ROCK",
     image = assets.rock,
-    grid = anim8.newGrid(16, 16, assets.rock:getWidth(), assets.rock:getHeight()),
+    grid = anim8.newGrid(8, 8, assets.rock:getWidth(), assets.rock:getHeight()),
     animation_names = {
         "DEFAULT"
     },
