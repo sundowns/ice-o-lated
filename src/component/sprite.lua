@@ -5,6 +5,7 @@ local sprite =
         e.animation = nil
         e.sx = sx
         e.sy = sy
+        e.visible = true
     end
 )
 
