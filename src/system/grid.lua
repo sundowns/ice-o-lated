@@ -219,8 +219,7 @@ function gridSystem:update(dt)
                 standable_pos = f:get(COMPONENTS.gridlocked).pos
                 if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
                     if f:has(COMPONENTS.isGoal) then
-                        print("you win nerd")
-                    -- TODO: trigger next level (on a timer after a 'woo u did it message?')
+                        INSTANCES.world:emit("goalReached")
                     end
                 end
             end

@@ -10,16 +10,30 @@ function stageManager:init()
     }
 end
 
+function stageManager:loadStage(path)
+    self.current_stage = STI(STAGES_PATH .. self.stages[self.current_stage_index])
+    INSTANCES.world:clear()
+    Timer.clear()
+    INSTANCES.world:emit("stageLoaded", self.current_stage)
+end
+
 function stageManager:nextStage()
     self.current_stage_index = self.current_stage_index + 1
     if self.stages[self.current_stage_index] then
-        self.current_stage = STI(STAGES_PATH .. self.stages[self.current_stage_index])
-        INSTANCES.world:clear()
-        INSTANCES.world:emit("stageLoaded", self.current_stage)
+        self:loadStage(STAGES_PATH .. self.stages[self.current_stage_index])
     else
         -- u ran out of levels dawg (crash yeet)
         assert(false, "U RAN OUT OF LEVELS DAWGGGGGGGGGGGGGG")
     end
+end
+
+function stageManager:goalReached()
+    -- probs some other shit idk
+    self:nextStage()
+end
+
+function stageManager:restartStage()
+    self:loadStage(STAGES_PATH .. self.stages[self.current_stage_index])
 end
 
 function stageManager:update(dt)

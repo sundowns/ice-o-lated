@@ -53,6 +53,7 @@ end
 
 function love.draw()
     INSTANCES.world:emit("draw")
+    love.graphics.print("[SPACE] - Restart Level")
 end
 
 function love.keyreleased(key)
@@ -65,8 +66,7 @@ function love.keypressed(key)
     elseif key == "escape" then
         love.event.quit()
     elseif key == "space" then
-        -- love.event.quit("restart")
-        INSTANCES.world:emit("nextStage")
+        INSTANCES.world:emit("restartStage")
     end
     INSTANCES.world:emit("keypressed", key)
 end

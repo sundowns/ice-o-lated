@@ -10,6 +10,8 @@ local stageManager = SYSTEMS.stageManager()
 
 world:addSystem(stageManager, "update")
 world:addSystem(stageManager, "nextStage")
+world:addSystem(stageManager, "goalReached")
+world:addSystem(stageManager, "restartStage")
 
 world:addSystem(gridSystem, "draw")
 world:addSystem(gridSystem, "update")
@@ -31,6 +33,8 @@ world:addSystem(renderSprite, "spriteStateUpdated")
 
 world:enableSystem(stageManager, "update")
 world:enableSystem(stageManager, "nextStage")
+world:enableSystem(stageManager, "goalReached")
+world:enableSystem(stageManager, "restartStage")
 
 world:enableSystem(gridSystem, "draw")
 world:enableSystem(gridSystem, "update")
