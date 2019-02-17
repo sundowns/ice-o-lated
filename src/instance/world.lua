@@ -1,6 +1,6 @@
 local world = Instance()
 
-local gridSystem = SYSTEMS.grid(CONSTANTS.COLUMNS, CONSTANTS.ROWS, CONSTANTS.CELL_WIDTH, CONSTANTS.CELL_WIDTH)
+local gridSystem = SYSTEMS.grid()
 local dir = SYSTEMS.direction()
 local keyInput = SYSTEMS.keyInput()
 local renderSprite = SYSTEMS.renderSprite()

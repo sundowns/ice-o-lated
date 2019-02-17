@@ -61,8 +61,8 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
     end
 
     for i, object in ipairs(objects) do
-        local gridX = object.worldX / self.tileWidth
-        local gridY = object.worldY / self.tileHeight
+        local gridX = (object.worldX / self.tileWidth) + 1
+        local gridY = (object.worldY / self.tileHeight)
         if object.type == "Crate" then
             INSTANCES.world:addEntity(ENTITIES.boulder(gridX, gridY))
         elseif object.type == "Rock" then
@@ -109,6 +109,10 @@ function gridSystem:cellIsOccupied(x, y)
     return self.grid[x][y].isOccupied
 end
 
+function gridSystem:cellIsSlidey(x, y)
+    return self.grid[x][y].slidey
+end
+
 function gridSystem:entityAdded(e)
     if not e:has(COMPONENTS.standable) then
         local gridpos = e:get(COMPONENTS.gridlocked).pos
@@ -122,7 +126,10 @@ end
 function gridSystem:draw()
     if self.stage then
         love.graphics.push()
-        love.graphics.translate(self.cellWidth / self.tileWidth + 28, self.cellHeight / self.tileHeight + 28) -- fuck this & fuck u
+        love.graphics.translate(
+            WORLD_OFFSET.x + (self.cellWidth / self.tileWidth + 28),
+            WORLD_OFFSET.y + (self.cellHeight / self.tileHeight + 28)
+        ) -- fuck this & fuck u
         love.graphics.scale(self.cellWidth / self.tileWidth, self.cellHeight / self.tileHeight)
         if self.stage.layers["Floor"] then
             self.stage.layers["Floor"]:draw()
@@ -138,7 +145,13 @@ function gridSystem:draw()
     for k, col in pairs(self.grid) do
         for n, cell in pairs(col) do
             love.graphics.setColor(0, 0, 0, 0.15)
-            love.graphics.rectangle("line", cell.x * cell.width, cell.y * cell.height, cell.width, cell.height)
+            love.graphics.rectangle(
+                "line",
+                WORLD_OFFSET.x + cell.x * cell.width,
+                WORLD_OFFSET.y + cell.y * cell.height,
+                cell.width,
+                cell.height
+            )
         end
     end
 end
@@ -171,7 +184,7 @@ function gridSystem:move()
         e = self.player:get(i)
 
         local gridlocked = e:get(COMPONENTS.gridlocked)
-        if not gridlocked.isOrderedToMove and not gridlocked.isMoving then
+        if not gridlocked.isOrderedToMove and not gridlocked.isMoving and not gridlocked.isSliding then
             gridlocked:orderToMove()
         end
     end
@@ -193,23 +206,36 @@ function gridSystem:moveToNewCell(dx, dy, pos, gridlocked, direction)
                 gridlocked:setMoving(false)
                 self:freeCell(oldGridX, oldGridY)
                 self:fillCell(newGridX, newGridY)
+                if self:cellExists(newGridX, newGridY) and self:cellIsSlidey(newGridX, newGridY) then
+                    gridlocked:setSliding(true)
+                    gridlocked:orderToMove()
+                else
+                    gridlocked:setSliding(false)
+                end
             end
         )
     elseif self:cellExists(newGridX, newGridY) and self:cellIsOccupied(newGridX, newGridY) then
         gridlocked:orderToStopMoving()
-        self:pushed(newGridX, newGridY, direction)
+        if not gridlocked.isSliding then
+            self:pushed(newGridX, newGridY, direction)
+        end
+        gridlocked:setSliding(false)
+    end
+    if not self:cellExists(newGridX, newGridY) or self:cellIsOccupied(newGridX, newGridY) then
+        gridlocked:setSliding(false)
     end
 end
 
-function gridSystem:pushed(x, y, direction)
+function gridSystem:pushed(x, y, playerDirection)
     local e
     for i = 1, self.pushable.size do
         e = self.pushable:get(i)
 
-        local pos = e:get(COMPONENTS.position).pos
-        local direction = e:get(COMPONENTS.direction)
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if gridlocked.pos.x == x and gridlocked.pos.y == y then
+            local pos = e:get(COMPONENTS.position).pos
+            local direction = e:get(COMPONENTS.direction)
+            direction.value = playerDirection.value
             if not gridlocked.isMoving then
                 if direction.value == CONSTANTS.ORIENTATIONS.LEFT then
                     self:moveToNewCell(-1, 0, pos, gridlocked, direction)
@@ -231,14 +257,29 @@ function gridSystem:stageLoaded(stage)
     assert(stage.layers["Floor"])
     local cols, rows, tileWidth, tileHeight, tilesArray = readTileLayerData(stage.layers["Floor"])
     local objects = readObjectLayerData(stage.layers["Objects"])
-    self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1], objects)
+
+    --update the world offset
+    local offsetX = (love.graphics.getWidth() / 2) - (cols * CONSTANTS.CELL_WIDTH / 2)
+    local offsetY = (love.graphics.getHeight() / 2) - (rows * CONSTANTS.CELL_HEIGHT / 2)
+    WORLD_OFFSET = Vector(offsetX, offsetY)
+    self:createGrid(
+        cols,
+        rows,
+        tileWidth,
+        tileHeight,
+        CONSTANTS.CELL_WIDTH,
+        CONSTANTS.CELL_HEIGHT,
+        tilesArray,
+        stage.tilesets[1],
+        objects
+    )
 end
 
 function readTileLayerData(tileLayer)
     assert(tileLayer.data)
-    local cols = #tileLayer.data -- not 100% which one should be cols and which should be rows cause theyre same atm
+    local rows = #tileLayer.data -- not 100% which one should be cols and which should be rows cause theyre same atm
     assert(tileLayer.data[1])
-    local rows = #tileLayer.data[1]
+    local cols = #tileLayer.data[1]
     assert(tileLayer.data[1][1].width)
     assert(tileLayer.data[1][1].height)
     local tileWidth = tileLayer.data[1][1].width

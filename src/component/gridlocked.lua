@@ -5,6 +5,7 @@ local gridlocked =
         e.pos = Vector(x, y)
         e.isMoving = false
         e.isOrderedToMove = false
+        e.isSliding = false
     end
 )
 
@@ -16,6 +17,10 @@ end
 
 function gridlocked:setMoving(isMoving)
     self.isMoving = isMoving
+end
+
+function gridlocked:setSliding(isSliding)
+    self.isSliding = isSliding
 end
 
 function gridlocked:orderToMove()

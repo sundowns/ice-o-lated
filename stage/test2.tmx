@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="18" height="10" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="37">
+ <tileset firstgid="1" source="../asset/SNOW_ICE_TILESET.tsx"/>
+ <layer id="4" name="Floor" width="18" height="10">
+  <data encoding="csv">
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+17,68,68,68,68,68,68,68,133,133,133,133,133,133,133,133,133,19,
+114,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,19,
+17,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,19,
+33,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,35
+</data>
+ </layer>
+ <layer id="5" name="Cosmetic" width="18" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects">
+  <object id="6" type="Crate" gid="121" x="88" y="48" width="8" height="8"/>
+  <object id="7" type="Crate" gid="121" x="88" y="40" width="8" height="8"/>
+  <object id="8" type="Rock" gid="154" x="128" y="48" width="8" height="8"/>
+  <object id="9" type="Rock" gid="154" x="96" y="64" width="8" height="8"/>
+  <object id="10" type="Rock" gid="154" x="120" y="72" width="8" height="8"/>
+  <object id="11" type="Switch" gid="169" x="56" y="40" width="8" height="8"/>
+  <object id="12" type="Rock" gid="154" x="112" y="72" width="8" height="8"/>
+  <object id="14" type="Rock" gid="154" x="104" y="72" width="8" height="8"/>
+  <object id="15" type="Rock" gid="154" x="128" y="72" width="8" height="8"/>
+  <object id="16" type="Rock" gid="154" x="128" y="64" width="8" height="8"/>
+  <object id="17" type="Rock" gid="154" x="128" y="56" width="8" height="8"/>
+  <object id="18" type="Rock" gid="154" x="128" y="40" width="8" height="8"/>
+  <object id="19" type="Rock" gid="154" x="128" y="32" width="8" height="8"/>
+  <object id="20" type="Rock" gid="154" x="96" y="80" width="8" height="8"/>
+  <object id="21" type="Rock" gid="154" x="96" y="72" width="8" height="8"/>
+  <object id="22" type="Rock" gid="154" x="96" y="8" width="8" height="8"/>
+  <object id="23" type="Rock" gid="154" x="96" y="16" width="8" height="8"/>
+  <object id="24" type="Rock" gid="154" x="96" y="24" width="8" height="8"/>
+  <object id="25" type="Rock" gid="154" x="104" y="16" width="8" height="8"/>
+  <object id="26" type="Rock" gid="154" x="112" y="16" width="8" height="8"/>
+  <object id="27" type="Rock" gid="154" x="120" y="16" width="8" height="8"/>
+  <object id="28" type="Rock" gid="154" x="128" y="16" width="8" height="8"/>
+  <object id="29" type="Rock" gid="154" x="128" y="24" width="8" height="8"/>
+  <object id="30" type="Rock" gid="154" x="96" y="56" width="8" height="8"/>
+  <object id="31" type="Rock" gid="154" x="96" y="32" width="8" height="8"/>
+  <object id="33" type="Rock" gid="154" x="112" y="48" width="8" height="8"/>
+  <object id="34" type="Rock" gid="154" x="112" y="40" width="8" height="8"/>
+  <object id="35" type="Rock" gid="154" x="88" y="56" width="8" height="8"/>
+  <object id="36" type="Rock" gid="154" x="88" y="32" width="8" height="8"/>
+ </objectgroup>
+</map>
