@@ -10,5 +10,6 @@ return {
     pushable = require(PATH .. ".pushable"),
     standable = require(PATH .. ".standable"),
     openable = require(PATH .. ".openable"),
-    pressable = require(PATH .. ".pressable")
+    pressable = require(PATH .. ".pressable"),
+    isGoal = require(PATH .. ".isGoal")
 }

@@ -5,6 +5,7 @@ local gridSystem =
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.playerControlled, "player"},
     {COMPONENTS.position, COMPONENTS.direction, COMPONENTS.gridlocked, COMPONENTS.pushable, "pushable"},
     {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.pressable, "pressable"},
+    {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.standable, "standable"},
     {COMPONENTS.position, COMPONENTS.gridlocked, COMPONENTS.openable, "openable"}
 )
 
@@ -72,6 +73,8 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
             INSTANCES.world:addEntity(ENTITIES.switch(gridX, gridY))
         elseif object.type == "Door" then
             INSTANCES.world:addEntity(ENTITIES.door(gridX, gridY))
+        elseif object.type == "Goal" then
+            INSTANCES.world:addEntity(ENTITIES.goal(gridX, gridY))
         end
     end
 
@@ -199,6 +202,19 @@ function gridSystem:update(dt)
                 self:moveToNewCell(1, 0, pos, gridlocked, direction)
             elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
                 self:moveToNewCell(0, 1, pos, gridlocked, direction)
+            end
+        end
+
+        if e:has(COMPONENTS.playerControlled) then
+            local f
+            for j = 1, self.standable.size do
+                f = self.standable:get(j)
+                standable_pos = f:get(COMPONENTS.gridlocked).pos
+                if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
+                    if f:has(COMPONENTS.isGoal) then
+                        print("you win nerd")
+                    end
+                end
             end
         end
     end
