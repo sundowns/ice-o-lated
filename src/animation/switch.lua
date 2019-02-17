@@ -4,7 +4,7 @@ assert(anim8)
 return {
     id = "SWITCH",
     image = assets.switch,
-    grid = anim8.newGrid(16, 16, assets.switch:getWidth(), assets.switch:getHeight()),
+    grid = anim8.newGrid(8, 8, assets.switch:getWidth(), assets.switch:getHeight()),
     animation_names = {
         "DEFAULT"
     },
