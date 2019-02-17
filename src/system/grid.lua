@@ -292,9 +292,9 @@ end
 
 function readTileLayerData(tileLayer)
     assert(tileLayer.data)
-    local cols = #tileLayer.data -- not 100% which one should be cols and which should be rows cause theyre same atm
+    local rows = #tileLayer.data -- not 100% which one should be cols and which should be rows cause theyre same atm
     assert(tileLayer.data[1])
-    local rows = #tileLayer.data[1]
+    local cols = #tileLayer.data[1]
     assert(tileLayer.data[1][1].width)
     assert(tileLayer.data[1][1].height)
     local tileWidth = tileLayer.data[1][1].width
