@@ -122,7 +122,10 @@ end
 function gridSystem:draw()
     if self.stage then
         love.graphics.push()
-        love.graphics.translate(self.cellWidth / self.tileWidth + 28, self.cellHeight / self.tileHeight + 28) -- fuck this & fuck u
+        love.graphics.translate(
+            WORLD_OFFSET.x + (self.cellWidth / self.tileWidth + 28),
+            WORLD_OFFSET.y + (self.cellHeight / self.tileHeight + 28)
+        ) -- fuck this & fuck u
         love.graphics.scale(self.cellWidth / self.tileWidth, self.cellHeight / self.tileHeight)
         if self.stage.layers["Floor"] then
             self.stage.layers["Floor"]:draw()
@@ -138,7 +141,13 @@ function gridSystem:draw()
     for k, col in pairs(self.grid) do
         for n, cell in pairs(col) do
             love.graphics.setColor(0, 0, 0, 0.15)
-            love.graphics.rectangle("line", cell.x * cell.width, cell.y * cell.height, cell.width, cell.height)
+            love.graphics.rectangle(
+                "line",
+                WORLD_OFFSET.x + cell.x * cell.width,
+                WORLD_OFFSET.y + cell.y * cell.height,
+                cell.width,
+                cell.height
+            )
         end
     end
 end
@@ -231,7 +240,22 @@ function gridSystem:stageLoaded(stage)
     assert(stage.layers["Floor"])
     local cols, rows, tileWidth, tileHeight, tilesArray = readTileLayerData(stage.layers["Floor"])
     local objects = readObjectLayerData(stage.layers["Objects"])
-    self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1], objects)
+
+    --update the world offset
+    local offsetX = (love.graphics.getWidth() / 2) - (cols * CONSTANTS.CELL_WIDTH / 2)
+    local offsetY = (love.graphics.getHeight() / 2) - (rows * CONSTANTS.CELL_HEIGHT / 2)
+    WORLD_OFFSET = Vector(offsetX, offsetY)
+    self:createGrid(
+        cols,
+        rows,
+        tileWidth,
+        tileHeight,
+        CONSTANTS.CELL_WIDTH,
+        CONSTANTS.CELL_HEIGHT,
+        tilesArray,
+        stage.tilesets[1],
+        objects
+    )
 end
 
 function readTileLayerData(tileLayer)

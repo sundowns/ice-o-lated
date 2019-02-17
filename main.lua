@@ -5,6 +5,7 @@ CONSTANTS = nil
 COMPONENTS = nil
 ENTITIES = nil
 SYSTEMS = nil
+WORLD_OFFSET = nil
 
 -- Libraries
 ECS = nil
@@ -36,6 +37,7 @@ function love.load()
     Vector = require("lib.vector")
     Timer = require("lib.timer")
 
+    WORLD_OFFSET = Vector(0, 0)
     LOGIC = require("src.logic")
     COMPONENTS = require("src.component")
     ENTITIES = require("src.entity")
