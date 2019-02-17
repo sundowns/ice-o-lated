@@ -18,15 +18,25 @@
  </tile>
  <tile id="3">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="4">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="5">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="6">
+  <properties>
+   <property name="SLIDEY" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="7">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
   </properties>
@@ -48,7 +58,7 @@
  </tile>
  <tile id="19">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="20">
@@ -57,6 +67,16 @@
   </properties>
  </tile>
  <tile id="21">
+  <properties>
+   <property name="SLIDEY" type="bool" value="false"/>
+  </properties>
+ </tile>
+ <tile id="22">
+  <properties>
+   <property name="SLIDEY" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="23">
   <properties>
    <property name="SLIDEY" type="bool" value="true"/>
   </properties>
@@ -78,17 +98,17 @@
  </tile>
  <tile id="35">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="36">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="37">
   <properties>
-   <property name="SLIDEY" type="bool" value="true"/>
+   <property name="SLIDEY" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="64">
