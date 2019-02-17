@@ -177,18 +177,18 @@ function gridSystem:draw()
         love.graphics.pop()
     end
 
-    for k, col in pairs(self.grid) do
-        for n, cell in pairs(col) do
-            love.graphics.setColor(0, 0, 0, 0.15)
-            love.graphics.rectangle(
-                "line",
-                WORLD_OFFSET.x + cell.x * cell.width,
-                WORLD_OFFSET.y + cell.y * cell.height,
-                cell.width,
-                cell.height
-            )
-        end
-    end
+    --for k, col in pairs(self.grid) do
+    --    for n, cell in pairs(col) do
+    --        love.graphics.setColor(0, 0, 0, 0.15)
+    --        love.graphics.rectangle(
+    --            "line",
+    --            WORLD_OFFSET.x + cell.x * cell.width,
+    --            WORLD_OFFSET.y + cell.y * cell.height,
+    --            cell.width,
+    --            cell.height
+    --        )
+    --    end
+    --end
 end
 
 function gridSystem:update(dt)
