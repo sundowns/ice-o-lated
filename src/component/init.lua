@@ -11,5 +11,7 @@ return {
     standable = require(PATH .. ".standable"),
     openable = require(PATH .. ".openable"),
     pressable = require(PATH .. ".pressable"),
-    isGoal = require(PATH .. ".isGoal")
+    rotatable = require(PATH .. ".rotatable"),
+    goal = require(PATH .. ".goal"),
+    spawn = require(PATH .. ".spawn")
 }

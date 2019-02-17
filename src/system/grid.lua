@@ -62,6 +62,7 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
         end
     end
 
+    local spawned = false
     for i, object in ipairs(objects) do
         local gridX = (object.worldX / self.tileWidth) + 1
         local gridY = (object.worldY / self.tileHeight)
@@ -75,10 +76,16 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
             INSTANCES.world:addEntity(ENTITIES.door(gridX, gridY))
         elseif object.type == "Goal" then
             INSTANCES.world:addEntity(ENTITIES.goal(gridX, gridY))
+        elseif object.type == "Spawn" then
+            INSTANCES.world:addEntity(ENTITIES.player(gridX, gridY))
+            spawned = true
         end
     end
 
-    INSTANCES.world:addEntity(ENTITIES.player())
+    if not spawned then
+        -- spawn top left by default
+        INSTANCES.world:addEntity(ENTITIES.player(1, 1))
+    end
 end
 
 function gridSystem:evaluateAllSwitches()
@@ -219,7 +226,7 @@ function gridSystem:update(dt)
 
                 standable_pos = f:get(COMPONENTS.gridlocked).pos
                 if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
-                    if f:has(COMPONENTS.isGoal) then
+                    if f:has(COMPONENTS.goal) then
                         INSTANCES.world:emit("goalReached")
                     end
                 end

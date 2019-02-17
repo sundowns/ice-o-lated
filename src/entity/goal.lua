@@ -4,7 +4,7 @@ return function(x, y)
         COMPONENTS.position,
         x * CONSTANTS.CELL_WIDTH,
         y * CONSTANTS.CELL_HEIGHT
-    ):give(COMPONENTS.gridlocked, 0.25, x, y):give(COMPONENTS.standable):give(COMPONENTS.isGoal):apply()
+    ):give(COMPONENTS.gridlocked, 0.25, x, y):give(COMPONENTS.standable):give(COMPONENTS.goal):apply()
 
     return goal
 end

@@ -5,8 +5,10 @@ function stageManager:init()
     self.current_stage_index = 0
     self.current_stage = nil
     self.stages = {
-        "test1.lua",
+        "tutorial01.lua",
+        "tutorial03.lua",
         "test2.lua",
+        "test1.lua",
         "test3.lua"
     }
 end
