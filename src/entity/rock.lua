@@ -1,6 +1,5 @@
 return function(x, y)
-    local rockImg = love.graphics.newImage("asset/obstacle.png")
-    -- INSTANCES.world:emit("entityCreated", x, y)
+    local rockImg = love.graphics.newImage("asset/rock.png")
     local rock =
         Entity():give(COMPONENTS.sprite, rockImg):give(
         COMPONENTS.position,

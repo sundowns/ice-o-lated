@@ -1,6 +1,5 @@
 return function(x, y)
     local switchImg = love.graphics.newImage("asset/blob-fire.png")
-    -- INSTANCES.world:emit("entityCreated", x, y)
     local switch =
         Entity():give(COMPONENTS.sprite, switchImg):give(
         COMPONENTS.position,

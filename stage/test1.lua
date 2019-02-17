@@ -9,7 +9,7 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 4,
-  nextobjectid = 8,
+  nextobjectid = 12,
   properties = {},
   tilesets = {
     {
@@ -653,6 +653,62 @@ return {
           height = 8,
           rotation = 0,
           gid = 121,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 8,
+          name = "",
+          type = "Rock",
+          shape = "rectangle",
+          x = 16,
+          y = 40,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 154,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 9,
+          name = "",
+          type = "Rock",
+          shape = "rectangle",
+          x = 56,
+          y = 72,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 154,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 10,
+          name = "",
+          type = "Rock",
+          shape = "rectangle",
+          x = 24,
+          y = 16,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 154,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 11,
+          name = "",
+          type = "Switch",
+          shape = "rectangle",
+          x = 24,
+          y = 48,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 169,
           visible = true,
           properties = {}
         }
