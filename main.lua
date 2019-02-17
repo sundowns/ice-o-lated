@@ -42,27 +42,7 @@ function love.load()
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
     INSTANCES.world:emit("loadStage", "stage/test1.lua")
-    -- testRocks() -- TODO: remove
-    -- testBoulders() -- TODO: remove
 end
-
--- function testRocks()
---     for i = 0, 15 do
---         local rand_x = math.random(CONSTANTS.COLUMNS)
---         local rand_y = math.random(CONSTANTS.ROWS)
-
---         INSTANCES.world:addEntity(ENTITIES.rock(rand_x, rand_y))
---     end
--- end
-
--- function testBoulders()
---     for i = 0, 7 do
---         local rand_x = math.random(CONSTANTS.COLUMNS)
---         local rand_y = math.random(CONSTANTS.ROWS)
-
---         INSTANCES.world:addEntity(ENTITIES.boulder(rand_x, rand_y))
---     end
--- end
 
 function love.update(dt)
     INSTANCES.world:emit("update", dt)

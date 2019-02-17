@@ -9,7 +9,7 @@ return {
   tilewidth = 8,
   tileheight = 8,
   nextlayerid = 4,
-  nextobjectid = 6,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -629,11 +629,25 @@ return {
       properties = {},
       objects = {
         {
-          id = 3,
+          id = 6,
           name = "",
           type = "Crate",
           shape = "rectangle",
-          x = 40,
+          x = 32,
+          y = 32,
+          width = 8,
+          height = 8,
+          rotation = 0,
+          gid = 121,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 7,
+          name = "",
+          type = "Crate",
+          shape = "rectangle",
+          x = 48,
           y = 32,
           width = 8,
           height = 8,

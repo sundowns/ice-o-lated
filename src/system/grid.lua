@@ -64,7 +64,7 @@ function gridSystem:createGrid(cols, rows, tileWidth, tileHeight, cellWidth, cel
         Util.t.print(object)
         local gridX = object.worldX / self.tileWidth
         local gridY = object.worldY / self.tileHeight
-        INSTANCES.world:addEntity(ENTITIES.rock(gridX, gridY))
+        INSTANCES.world:addEntity(ENTITIES.boulder(gridX, gridY))
     end
 
     INSTANCES.world:addEntity(ENTITIES.player)
@@ -132,7 +132,7 @@ function gridSystem:draw()
 
     for k, col in pairs(self.grid) do
         for n, cell in pairs(col) do
-            love.graphics.setColor(1, 1, 0, 1)
+            love.graphics.setColor(0, 0, 0, 0.15)
             love.graphics.rectangle("line", cell.x * cell.width, cell.y * cell.height, cell.width, cell.height)
         end
     end
