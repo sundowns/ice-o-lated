@@ -223,7 +223,7 @@ end
 function gridSystem:stageLoaded(stage)
     self.stage = stage
     assert(stage.tilesets[1])
-    assert(stage.layers["Floor"]) --TODO: floor
+    assert(stage.layers["Floor"])
     local cols, rows, tileWidth, tileHeight, tilesArray = readTileLayerData(stage.layers["Floor"])
     local objects = readObjectLayerData(stage.layers["Objects"])
     self:createGrid(cols, rows, tileWidth, tileHeight, 32, 32, tilesArray, stage.tilesets[1], objects)
