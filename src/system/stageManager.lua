@@ -12,6 +12,7 @@ function stageManager:init()
         "stage01",
         "stage02",
         "stage03",
+        "stage035",
         "stage04",
         "stage05"
     }
