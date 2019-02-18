@@ -254,7 +254,6 @@ function gridSystem:move()
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if not gridlocked.isOrderedToMove and not gridlocked.isMoving and not gridlocked.isSliding then
             gridlocked:orderToMove()
-        --e:get(COMPONENTS.counter):update(1)
         end
     end
 end
