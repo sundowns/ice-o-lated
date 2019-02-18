@@ -168,6 +168,13 @@ function gridSystem:entityAdded(e)
 end
 
 function gridSystem:draw()
+    for i = 1, self.player.size do
+        e = self.player:get(i)
+
+        local counter = e:get(COMPONENTS.counter)
+        love.graphics.print("Moves Taken: " .. counter.value, 0, 30)
+    end
+
     if self.stage then
         love.graphics.push()
         love.graphics.translate(
@@ -247,6 +254,7 @@ function gridSystem:move()
         local gridlocked = e:get(COMPONENTS.gridlocked)
         if not gridlocked.isOrderedToMove and not gridlocked.isMoving and not gridlocked.isSliding then
             gridlocked:orderToMove()
+        --e:get(COMPONENTS.counter):update(1)
         end
     end
 end
@@ -283,6 +291,7 @@ function gridSystem:moveToNewCell(dx, dy, entity)
                         INSTANCES.world:emit("spriteStateUpdated", entity, "STAND")
                         AUDIO.snowStep:play()
                     end
+                    entity:get(COMPONENTS.counter):update(1)
                 end
             end
         )

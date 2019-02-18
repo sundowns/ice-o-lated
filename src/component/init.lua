@@ -7,6 +7,7 @@ return {
     sprite = require(PATH .. ".sprite"),
     gridlocked = require(PATH .. ".gridlocked"),
     playerControlled = require(PATH .. ".playerControlled"),
+    counter = require(PATH .. ".counter"),
     pushable = require(PATH .. ".pushable"),
     standable = require(PATH .. ".standable"),
     openable = require(PATH .. ".openable"),

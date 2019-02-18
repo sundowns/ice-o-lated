@@ -25,7 +25,7 @@ return function(x, y)
         CONSTANTS.BASE_TRANSITION_SPEED,
         x,
         y
-    ):apply()
+    ):give(COMPONENTS.counter, 0):apply()
 
     return player
 end
