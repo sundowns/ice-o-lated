@@ -10,7 +10,8 @@ function stageManager:init()
         "tutorial02.lua",
         "test2.lua",
         "test1.lua",
-        "test3.lua"
+        "test3.lua",
+        "test4.lua"
     }
 end
 
