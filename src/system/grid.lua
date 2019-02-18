@@ -172,7 +172,7 @@ function gridSystem:draw()
         e = self.player:get(i)
 
         local counter = e:get(COMPONENTS.counter)
-        love.graphics.print("Moves Taken: " .. counter.value, 0, 30)
+        love.graphics.print("Moves Taken: " .. counter.value, 10, 10)
     end
 
     if self.stage then
@@ -198,6 +198,9 @@ function gridSystem:update(dt)
     local e
     for i = 1, self.moveable.size do
         e = self.moveable:get(i)
+        if not e then
+            break
+        end
 
         local pos = e:get(COMPONENTS.position).pos
         local direction = e:get(COMPONENTS.direction)

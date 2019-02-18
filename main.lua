@@ -6,6 +6,7 @@ COMPONENTS = nil
 ENTITIES = nil
 SYSTEMS = nil
 WORLD_OFFSET = nil
+_WORLD = {}
 
 -- Libraries
 ECS = nil
@@ -44,12 +45,14 @@ function love.load()
     ENTITIES = require("src.entity")
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
-    INSTANCES.world:emit("nextStage")
 
     AUDIO = require("src.audio")
     AUDIO.pushBlock:setVolume(0.4) -- check out this wicked hack
     AUDIO.backgroundMusic:setLooping(true)
     AUDIO.backgroundMusic:play()
+    love.graphics.setFont(love.graphics.newFont("asset/Coiny-Regular.ttf", 20))
+
+    INSTANCES.world:emit("nextStage")
 end
 
 function love.update(dt)
@@ -59,7 +62,21 @@ end
 
 function love.draw()
     INSTANCES.world:emit("draw")
-    love.graphics.print("yes")
+    local x, y = 10, 60
+    function bump(y, delta)
+        return y + delta
+    end
+    love.graphics.print("[CONTROLS]", x, y)
+    y = bump(y, 40)
+    love.graphics.print("[SPACE]:       Restart Level", x, y)
+    y = bump(y, 25)
+    love.graphics.print("[w] [up]:        Up", x, y)
+    y = bump(y, 25)
+    love.graphics.print("[s] [down]:   Down", x, y)
+    y = bump(y, 25)
+    love.graphics.print("[a] [left]:      Left", x, y)
+    y = bump(y, 25)
+    love.graphics.print("[d] [right]:    Right", x, y)
 end
 
 function love.keyreleased(key)

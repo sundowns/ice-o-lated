@@ -11,13 +11,21 @@ return function(x, y)
                 w = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.UP),
                 s = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.DOWN),
                 a = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.LEFT),
-                d = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.RIGHT)
+                d = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.RIGHT),
+                up = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.UP),
+                down = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.DOWN),
+                left = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.LEFT),
+                right = LOGIC.continueMove(CONSTANTS.ORIENTATIONS.RIGHT)
             },
             keypressed = {
                 w = LOGIC.move(CONSTANTS.ORIENTATIONS.UP),
                 s = LOGIC.move(CONSTANTS.ORIENTATIONS.DOWN),
                 a = LOGIC.move(CONSTANTS.ORIENTATIONS.LEFT),
-                d = LOGIC.move(CONSTANTS.ORIENTATIONS.RIGHT)
+                d = LOGIC.move(CONSTANTS.ORIENTATIONS.RIGHT),
+                up = LOGIC.move(CONSTANTS.ORIENTATIONS.UP),
+                down = LOGIC.move(CONSTANTS.ORIENTATIONS.DOWN),
+                left = LOGIC.move(CONSTANTS.ORIENTATIONS.LEFT),
+                right = LOGIC.move(CONSTANTS.ORIENTATIONS.RIGHT)
             }
         }
     ):give(COMPONENTS.playerControlled):give(COMPONENTS.direction, "RIGHT"):give(
