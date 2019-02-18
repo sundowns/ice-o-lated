@@ -5,8 +5,8 @@ local counter =
     end
 )
 
-function counter:increment(difference)
-    self.value = self.value + difference
+function counter:increment()
+    self.value = self.value + 1
 end
 
 return counter

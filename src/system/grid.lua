@@ -243,6 +243,12 @@ function gridSystem:move()
     end
 end
 
+function bumpCounter(entity)
+    if entity:has(COMPONENTS.counter) then
+        entity:get(COMPONENTS.counter):increment()
+    end
+end
+
 function gridSystem:moveToNewCell(dx, dy, entity)
     local gridlocked = entity:get(COMPONENTS.gridlocked)
     local direction = entity:get(COMPONENTS.direction)
@@ -268,10 +274,10 @@ function gridSystem:moveToNewCell(dx, dy, entity)
                 if sliding then
                     gridlocked:orderToMove()
                     if not wasSliding then
-                        entity:get(COMPONENTS.counter):increment(1)
+                        bumpCounter(entity)
                     end
                 elseif not wasSliding then
-                    entity:get(COMPONENTS.counter):increment(1)
+                    bumpCounter(entity)
                 end
                 if entity:has(COMPONENTS.playerControlled) and entity:has(COMPONENTS.sprite) then
                     if sliding then

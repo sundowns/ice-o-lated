@@ -59,7 +59,7 @@ end
 
 function love.draw()
     INSTANCES.world:emit("draw")
-    love.graphics.print("[SPACE] - Restart Level")
+    love.graphics.print("yes")
 end
 
 function love.keyreleased(key)
