@@ -12,7 +12,8 @@ function stageManager:init()
         "stage01",
         "stage02",
         "stage03",
-        "stage04"
+        "stage04",
+        "stage05"
     }
     self.stageText = nil
 end
