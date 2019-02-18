@@ -12,8 +12,7 @@ function stageManager:init()
         "stage01.lua",
         "stage02.lua",
         "stage03.lua",
-        "stage04.lua",
-        "tilt01.lua"
+        "stage04.lua"
     }
 end
 
@@ -31,7 +30,8 @@ function stageManager:nextStage()
         self:loadStage(STAGES_PATH .. self.stages[self.current_stage_index])
     else
         -- u ran out of levels dawg (crash yeet)
-        assert(false, "U RAN OUT OF LEVELS DAWGGGGGGGGGGGGGG")
+        -- assert(false, "U RAN OUT OF LEVELS DAWGGGGGGGGGGGGGG")
+        GamestateManager.switch(victory)
     end
 end
 
