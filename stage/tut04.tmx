@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="15" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="43">
+ <tileset firstgid="1" source="../asset/SNOW_ICE_TILESET.tsx"/>
+ <layer id="1" name="Floor" width="10" height="15">
+  <data encoding="csv">
+81,81,81,21,21,22,18,18,146,18,
+81,81,81,1,37,87,18,18,146,18,
+81,81,81,22,18,18,18,18,146,18,
+37,37,37,87,149,147,147,147,166,18,
+18,18,18,18,146,18,18,18,18,18,
+18,184,185,18,146,18,18,18,18,18,
+18,200,201,18,162,147,147,150,18,18,
+18,18,165,147,161,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18,
+18,18,149,147,161,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18,
+18,18,18,18,146,18,18,18,18,18
+</data>
+ </layer>
+ <layer id="2" name="Cosmetic" width="10" height="15">
+  <data encoding="csv">
+0,0,39,39,39,39,39,39,0,0,
+39,39,39,39,39,39,39,39,39,39,
+0,0,39,39,39,39,39,39,0,0,
+0,39,39,39,39,39,39,39,39,39,
+0,0,0,39,39,39,39,39,39,39,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects">
+  <object id="12" type="Crate" gid="121" x="64" y="32" width="8" height="8"/>
+  <object id="33" type="Crate" gid="121" x="64" y="112" width="8" height="8"/>
+  <object id="34" type="Switch" gid="138" x="56" y="56" width="8" height="8"/>
+  <object id="35" type="Rock" gid="154" x="56" y="112" width="8" height="8"/>
+  <object id="36" type="Rock" gid="154" x="8" y="8" width="8" height="8"/>
+  <object id="37" type="Rock" gid="154" x="8" y="16" width="8" height="8"/>
+  <object id="38" type="Rock" gid="154" x="8" y="24" width="8" height="8"/>
+  <object id="39" type="Door" gid="170" x="0" y="24" width="8" height="8"/>
+  <object id="40" type="Goal" gid="169" x="0" y="8" width="8" height="8"/>
+  <object id="41" type="Spawn" gid="153" x="64" y="16" width="8" height="8"/>
+  <object id="42" type="Switch" gid="138" x="16" y="80" width="8" height="8"/>
+ </objectgroup>
+</map>
