@@ -23,6 +23,7 @@ function love.load()
     Util = require("lib.util")
     assets = require("lib.cargo").init("asset")
     anim8 = require("lib.anim8")
+    ripple = require("lib.ripple")
     STI = require("lib.sti")
     ECS =
         require("lib.concord").init(
@@ -44,6 +45,15 @@ function love.load()
     SYSTEMS = require("src.system")
     INSTANCES = require("src.instance")
     INSTANCES.world:emit("nextStage")
+
+    backgroundMusic =
+        ripple.newSound(
+        {
+            source = love.audio.newSource("asset/frozen_over.wav", "static")
+        }
+    )
+    backgroundMusic:setLooping(true)
+    backgroundMusic:play()
 end
 
 function love.update(dt)
