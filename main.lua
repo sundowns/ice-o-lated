@@ -1,3 +1,5 @@
+_SCORES = {}
+
 function love.load()
     GamestateManager = require("lib.gamestate")
     require("victory")
