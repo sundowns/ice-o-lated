@@ -46,14 +46,10 @@ function love.load()
     INSTANCES = require("src.instance")
     INSTANCES.world:emit("nextStage")
 
-    backgroundMusic =
-        ripple.newSound(
-        {
-            source = love.audio.newSource("asset/frozen_over.wav", "static")
-        }
-    )
-    backgroundMusic:setLooping(true)
-    backgroundMusic:play()
+    AUDIO = require("src.audio")
+    AUDIO.pushBlock:setVolume(0.4) -- check out this wicked hack
+    AUDIO.backgroundMusic:setLooping(true)
+    AUDIO.backgroundMusic:play()
 end
 
 function love.update(dt)

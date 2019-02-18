@@ -105,6 +105,7 @@ function gridSystem:evaluateAllSwitches()
             f.isOpen = true
             f:get(COMPONENTS.sprite).visible = false
             self:freeCell(pos.x, pos.y)
+            AUDIO.buttonPress:play()
         end
     else
         for i = 1, self.openable.size do
@@ -113,6 +114,7 @@ function gridSystem:evaluateAllSwitches()
             f.isOpen = false
             f:get(COMPONENTS.sprite).visible = true
             self:fillCell(pos.x, pos.y)
+            AUDIO.buttonPress:play()
         end
     end
 end
@@ -227,6 +229,7 @@ function gridSystem:update(dt)
                 standable_pos = f:get(COMPONENTS.gridlocked).pos
                 if standable_pos.x == gridlocked.pos.x and standable_pos.y == gridlocked.pos.y then
                     if f:has(COMPONENTS.goal) then
+                        AUDIO.goalReached:play()
                         INSTANCES.world:emit("goalReached")
                     end
                 end
@@ -273,8 +276,10 @@ function gridSystem:moveToNewCell(dx, dy, entity)
                 if entity:has(COMPONENTS.playerControlled) and entity:has(COMPONENTS.sprite) then
                     if sliding then
                         INSTANCES.world:emit("spriteStateUpdated", entity, "SLIDE")
+                        AUDIO.iceStep:play()
                     else
                         INSTANCES.world:emit("spriteStateUpdated", entity, "STAND")
+                        AUDIO.snowStep:play()
                     end
                 end
             end
@@ -310,6 +315,9 @@ function gridSystem:pushed(x, y, playerDirection)
                     self:moveToNewCell(1, 0, e)
                 elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
                     self:moveToNewCell(0, 1, e)
+                end
+                if not AUDIO.pushBlock:isPlaying() then
+                    AUDIO.pushBlock:play()
                 end
             end
         end
