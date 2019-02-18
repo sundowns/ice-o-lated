@@ -186,6 +186,8 @@ function gridSystem:draw()
         love.graphics.pop()
     end
 
+    --DRAW THE GRID
+
     --for k, col in pairs(self.grid) do
     --    for n, cell in pairs(col) do
     --        love.graphics.setColor(0, 0, 0, 0.15)
@@ -288,6 +290,7 @@ function gridSystem:moveToNewCell(dx, dy, entity)
         gridlocked:orderToStopMoving()
         if not gridlocked.isSliding then
             self:pushed(newGridX, newGridY, direction)
+            AUDIO.pushBlock:play()
         end
         gridlocked:setSliding(false)
     end
@@ -315,9 +318,6 @@ function gridSystem:pushed(x, y, playerDirection)
                     self:moveToNewCell(1, 0, e)
                 elseif direction.value == CONSTANTS.ORIENTATIONS.DOWN then
                     self:moveToNewCell(0, 1, e)
-                end
-                if not AUDIO.pushBlock:isPlaying() then
-                    AUDIO.pushBlock:play()
                 end
             end
         end
