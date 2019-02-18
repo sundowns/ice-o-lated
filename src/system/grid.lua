@@ -192,21 +192,6 @@ function gridSystem:draw()
 
         love.graphics.pop()
     end
-
-    --DRAW THE GRID
-
-    --for k, col in pairs(self.grid) do
-    --    for n, cell in pairs(col) do
-    --        love.graphics.setColor(0, 0, 0, 0.15)
-    --        love.graphics.rectangle(
-    --            "line",
-    --            WORLD_OFFSET.x + cell.x * cell.width,
-    --            WORLD_OFFSET.y + cell.y * cell.height,
-    --            cell.width,
-    --            cell.height
-    --        )
-    --    end
-    --end
 end
 
 function gridSystem:update(dt)
@@ -278,9 +263,15 @@ function gridSystem:moveToNewCell(dx, dy, entity)
                 self:freeCell(oldGridX, oldGridY)
                 self:fillCell(newGridX, newGridY)
                 local sliding = self:cellIsSlidey(newGridX, newGridY)
+                local wasSliding = gridlocked.isSliding
                 gridlocked:setSliding(sliding)
                 if sliding then
                     gridlocked:orderToMove()
+                    if not wasSliding then
+                        entity:get(COMPONENTS.counter):increment(1)
+                    end
+                elseif not wasSliding then
+                    entity:get(COMPONENTS.counter):increment(1)
                 end
                 if entity:has(COMPONENTS.playerControlled) and entity:has(COMPONENTS.sprite) then
                     if sliding then
@@ -290,7 +281,6 @@ function gridSystem:moveToNewCell(dx, dy, entity)
                         INSTANCES.world:emit("spriteStateUpdated", entity, "STAND")
                         AUDIO.snowStep:play()
                     end
-                    entity:get(COMPONENTS.counter):update(1)
                 end
             end
         )

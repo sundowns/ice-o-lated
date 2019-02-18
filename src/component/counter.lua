@@ -5,7 +5,7 @@ local counter =
     end
 )
 
-function counter:update(difference)
+function counter:increment(difference)
     self.value = self.value + difference
 end
 
