@@ -1,10 +1,10 @@
 return {
-    pushBlock = love.audio.newSource("asset/placing3.wav", "stream"),
     backgroundMusic = ripple.newSound(
         {
             source = love.audio.newSource("asset/frozen_over.wav", "static")
         }
     ),
+    pushBlock = love.audio.newSource("asset/placing3.wav", "stream"),
     goalReached = ripple.newSound(
         {
             source = love.audio.newSource("asset/cannonShoot.wav", "static")
